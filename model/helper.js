@@ -16,15 +16,15 @@ async function db(query) {
 			host: DB_HOST || "127.0.0.1",
 			user: DB_USER || "root",
 			password: DB_PASS,
-			database: DB_NAME || "database",
+			database: DB_NAME || "journal",
 			multipleStatements: true,
 		});
 
-		con.connect(function(err) {
+		con.connect(function (err) {
 			if (err) throw err;
 			console.log("Connected!");
 
-			con.query(query, function(err, result) {
+			con.query(query, function (err, result) {
 				if (err) {
 					results.error = err;
 					console.log(err);
