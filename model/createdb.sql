@@ -32,7 +32,7 @@ CREATE TABLE `sp_identifiers` (
 
 CREATE TABLE `safety_plan` (
 	`id` INT NOT NULL AUTO_INCREMENT,
-	`name` TEXT NOT NULL,
+	`date` TEXT NOT NULL,
 	PRIMARY KEY (`id`)
 );
 

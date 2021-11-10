@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 import React, { useState } from "react";
 import NewEntry from "./components/NewEntry";
@@ -9,39 +9,17 @@ import SafetyPlanEntry from "./components/SafetyPlanEntry";
 import "./App.css";
 
 function App() {
-	const [entries, setEntries] = useState([]);
-	const [safetyPlansResources, setSafetyPlansResources] = useState([]);
-	const [safetyPlansIdentifiers, setSafetyPlansIdentifiers] = useState([]);
-
-	const handleAddEntry = async (newEntry) => {
-		try {
-			const res = await fetch("/journal_entries", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(newEntry),
-			});
-			const data = await res.json();
-			setEntries(data);
-		} catch (err) {
-			console.log(err);
-		}
-	};
-
 	return (
 		<BrowserRouter>
-			hello
-			<SafetyPlanEntry />
+			<Link to={`/journal`}> Journal </Link> <br />
+			<Link to={`/safetyplan`}> Safety Plan </Link>
 			<Routes>
+				<Route path="/safetyplan" element={<SafetyPlan />} />
+				<Route path="/safetyplan/:id/newplan" element={<SafetyPlanEntry />} />
+
 				<Route path="/Journal" element={<Journal />}>
 					<Route path=":id" element={<JournalEntry />} />
-					<Route
-						path="NewEntry"
-						element={
-							<NewEntry addEntry={(newEntry) => handleAddEntry(newEntry)} />
-						}
-					/>
+					<Route path="NewEntry" element={<NewEntry />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
@@ -49,6 +27,3 @@ function App() {
 }
 
 export default App;
-
-/* <Route path="/Journal" element={<Journal />} /> */
-/* <Route path="/JournalEntry" element={<JournalEntry />} /> */

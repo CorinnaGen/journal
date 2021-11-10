@@ -14,7 +14,7 @@ export default function Journal() {
 		} catch (err) {
 			console.log(err);
 		}
-	}, []);
+	}, [entries]);
 
 	return (
 		<div>
@@ -23,10 +23,12 @@ export default function Journal() {
 				{entries &&
 					entries.map((entry) => (
 						<div key={entry.id}>
-							<Link to={`/journal/${entry.id}`}>{entry.title}</Link>
+							<Link to={`/journal/${entry.id}`}>{entry.date}</Link>
 						</div>
 					))}
 			</div>
+			<hr />
+			<Link to={`/journal/newentry`}> Add Entry </Link>
 			<hr />
 			<Outlet />
 		</div>

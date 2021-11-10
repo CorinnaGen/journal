@@ -84,15 +84,24 @@ router.put(
 	}
 );
 
-// router.delete("/:id", entryMustExist, async function (req, res, next) {
-// 	try {
-// 		await db(`DELETE FROM journal_entries WHERE id = "${req.entry.entry_id}";`);
-// 		const results = await db("SELECT * FROM journal_entries;");
-// 		res.send(results.data);
-// 	} catch (err) {
-// 		res.status(500).send(err);
-// 	}
-// });
+router.delete(
+	"/:sp_id/identifiers/:id",
+	identifierMustExist,
+	async function (req, res, next) {
+		try {
+			const { sp_id } = req.params;
+			const { id } = req.params;
+
+			await db(
+				`DELETE FROM sp_identifiers WHERE id = "${id}" AND sp_id=${sp_id};`
+			);
+			const results = await db("SELECT * FROM sp_identifiers;");
+			res.send(results.data);
+		} catch (err) {
+			res.status(500).send(err);
+		}
+	}
+);
 
 module.exports = router;
 

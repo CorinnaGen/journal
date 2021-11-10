@@ -17,9 +17,20 @@ function NewEntry({ addEntry }) {
 		setEntry((state) => ({ ...state, [name]: value }));
 	};
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		addEntry(entry);
+	const handleSubmit = async (e) => {
+		try {
+			const res = await fetch("/journal_entries", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(entry),
+			});
+			const data = await res.json();
+			setEntry(data);
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	return (
@@ -68,24 +79,3 @@ function NewEntry({ addEntry }) {
 }
 
 export default NewEntry;
-
-// id
-// :
-// 2
-// date
-// :
-// "11/2111"
-// entry_text
-// :
-// "Thisd,nvhbe"
-// moment_of_joy
-// :
-// "making wdfww work"
-// mood
-// :
-// "eweffe"
-// title
-// :
-// "First tjkfbhjwebjdewhile..."
-// new entry
-// :

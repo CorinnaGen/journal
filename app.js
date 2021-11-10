@@ -9,6 +9,7 @@ var usersRouter = require("./routes/users");
 var journalEntriesRouter = require("./routes/journal_entries");
 var spResourcesRouter = require("./routes/sp_resources.js");
 var spIdentifiersRouter = require("./routes/sp_identifiers.js");
+var safetyPlan = require("./routes/safety_plan.js");
 
 var app = express();
 
@@ -23,6 +24,7 @@ app.use("/users", usersRouter);
 app.use("/journal_entries", journalEntriesRouter);
 app.use("/safetyplan", spResourcesRouter);
 app.use("/safetyplan", spIdentifiersRouter);
+app.use("/safetyplan", safetyPlan);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

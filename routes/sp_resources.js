@@ -8,10 +8,6 @@ const { text } = require("express");
 // 	res.send("this is a test");
 // })
 
-router.get("/", (req, res) => {
-	res.send("use /resources for resources or /identified for identified");
-});
-
 router.get("/resources", async function (req, res, next) {
 	try {
 		const results = await db("SELECT * FROM sp_resources;");
@@ -28,13 +24,6 @@ router.get("/identifiers", async function (req, res, next) {
 	} catch (err) {
 		res.status(500).send(err);
 	}
-});
-
-router.get("/:sp_id/", (req, res) => {
-	const { sp_id } = req.params;
-	res.send(
-		`use /${sp_id}/resources for resources or /${sp_id}/identifiers for identifiers`
-	);
 });
 
 router.get("/:sp_id/resources", async function (req, res, next) {
@@ -107,15 +96,24 @@ router.put(
 	}
 );
 
-// router.delete("/:id", entryMustExist, async function (req, res, next) {
-// 	try {
-// 		await db(`DELETE FROM journal_entries WHERE id = "${req.entry.entry_id}";`);
-// 		const results = await db("SELECT * FROM journal_entries;");
-// 		res.send(results.data);
-// 	} catch (err) {
-// 		res.status(500).send(err);
-// 	}
-// });
+router.delete(
+	"/:sp_id/resources/:id",
+	resourceMustExist,
+	async function (req, res, next) {
+		try {
+			const { sp_id } = req.params;
+			const { id } = req.params;
+
+			await db(
+				`DELETE FROM sp_resources WHERE id = "${id}" and sp_id = "${sp_id}";`
+			);
+			const results = await db("SELECT * FROM sp_resources;");
+			res.send(results.data);
+		} catch (err) {
+			res.status(500).send(err);
+		}
+	}
+);
 
 module.exports = router;
 
