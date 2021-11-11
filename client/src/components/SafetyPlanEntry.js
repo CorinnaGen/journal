@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import "../App.css";
 
 //create safetyplan
@@ -19,6 +19,8 @@ export default function SafetyPlanEntry() {
 		sp_id: id,
 	});
 
+	const [date, setDate] = useState({ date: "" });
+
 	const handleResourceChange = (e) => {
 		const { value, name } = e.target;
 		setSafetyPlanResource((state) => ({ ...state, [name]: value }));
@@ -26,8 +28,73 @@ export default function SafetyPlanEntry() {
 	const handleIdentifierChange = (e) => {
 		const { value, name } = e.target;
 		setSafetyPlanIdentifier((state) => ({ ...state, [name]: value }));
-		// heading(safetyPlanIdentifier);
 	};
+	const handleDateChange = (e) => {
+		setDate({ date: e.target.value });
+	};
+
+	const handleIdentifierSubmit = async (e) => {
+		try {
+			const res = await fetch(`/safetyplan/${id}/identifiers`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(safetyPlanIdentifier),
+			});
+			const data = await res.json();
+			setSafetyPlanIdentifier(data);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+	const handleResourceSubmit = async (e) => {
+		try {
+			const res = await fetch(`/safetyplan/${id}/resources`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(safetyPlanResource),
+			});
+			const data = await res.json();
+			setSafetyPlanResource(data);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const updateDate = async (e) => {
+		try {
+			const res = await fetch(`/safetyplan/${id}/`, {
+				method: "Put",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(date),
+			});
+			const data = await res.json();
+			setDate(data);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	// router.put("/:id", spMustExist, async function (req, res, next) {
+	// 	try {
+	// 		const { id } = req.params;
+	// 		const { date } = req.body;
+
+	// 		if (date) {
+	// 			await db(`UPDATE safety_plan SET date = "${date}" WHERE id ="${id}";`);
+	// 		}
+
+	// 		const results = await db(`SELECT * FROM safety_plan WHERE id ="${id}";`);
+	// 		res.send(results.data);
+	// 	} catch (err) {
+	// 		res.status(500).send(err);
+	// 	}
+	// });
 
 	const heading = (safetyPlanIdentifier) => {
 		switch (safetyPlanIdentifier.type) {
@@ -54,26 +121,26 @@ export default function SafetyPlanEntry() {
 	};
 
 	return (
-		<div>
-			<form>
+		<div className="container">
+			<form onSubmit={updateDate}>
+				<label>Date</label>
+				<input
+					name="date"
+					type="text"
+					value={date.date}
+					onChange={handleDateChange}
+				/>
 				<h1>Identify Things...</h1>
 				{heading(safetyPlanIdentifier)}
 				<select name="type" onChange={handleIdentifierChange}>
-					<option name="How I know I don't feel well:" value="Trigger">
-						How I know I don't feel well:
-					</option>
-					<option name="Good ways to distract myself:" value="Distraction">
-						Good ways to distract myself:
-					</option>
-					<option
-						name="Things that help when I feel this way:"
-						value="Something Helpful"
-					>
+					<option selected> Choose one </option>
+
+					<option value="Trigger">How I know I don't feel well:</option>
+					<option value="Distraction">Good ways to distract myself:</option>
+					<option value="Something Helpful">
 						Things that help when I feel this way:
 					</option>
-					<option name="Ways to keep my space safe:" value="Space safety">
-						Ways to keep my space safe:
-					</option>
+					<option value="Space safety">Ways to keep my space safe:</option>
 				</select>{" "}
 				<br />
 				<input
@@ -81,12 +148,15 @@ export default function SafetyPlanEntry() {
 					onChange={handleIdentifierChange}
 					name="text"
 				/>{" "}
-				<button>Add </button>
+				<button onClick={handleIdentifierSubmit} type="submit">
+					Add{" "}
+				</button>
 			</form>
 			<br />
 			<h1>Identify Resources...</h1>
-			<form>
+			<form onSubmit={handleResourceSubmit}>
 				<select name="type" onChange={handleResourceChange}>
+					<option selected> Choose one </option>
 					<option value="1">Friend</option>
 					<option value="2">Professional</option>
 				</select>
@@ -104,7 +174,12 @@ export default function SafetyPlanEntry() {
 					value={safetyPlanResource.info}
 					onChange={handleResourceChange}
 				/>
+				<button type="submit">Add </button>
 			</form>
+			Finished?{" "}
+			<Link to={`/safetyplan`}>
+				<button>Go back </button>{" "}
+			</Link>
 		</div>
 	);
 }

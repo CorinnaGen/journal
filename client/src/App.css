@@ -1,0 +1,40 @@
+/* Hex Codes: #cb997e // #ddbea9 // #ffe8d6 // #b7b7a4 // #6b705c */
+/* Hex Codes: #223843 // #eff1f3 // #dbd3d8 // #d8b4a0 // #d77a61 */
+.bg-green {
+	--bs-bg-opacity: 1;
+	background-color: #223843;
+}
+
+.bg-lightgreen {
+	--bs-bg-opacity: 1;
+	background-color: #b7b7a4;
+}
+
+.bg-test1 {
+	--bs-bg-opacity: 1;
+	background-color: rgb(255, 241, 225);
+}
+.bg-test2 {
+	--bs-bg-opacity: 1;
+	background-color: rgb(255, 226, 216);
+}
+.bg-test3 {
+	--bs-bg-opacity: 1;
+	background-color: rgb(245, 213, 209);
+}
+.bg-test4 {
+	--bs-bg-opacity: 1;
+	background-color: rgb(172, 176, 181);
+}
+.bg-test5 {
+	--bs-bg-opacity: 1;
+	background-color: rgb(145, 163, 164);
+}
+.bg-test6 {
+	--bs-bg-opacity: 1;
+	background-color: rgb(227, 231, 232);
+}
+.bg-test7 {
+	--bs-bg-opacity: 1;
+	background-color: #ffe8d6;
+}

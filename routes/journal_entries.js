@@ -16,7 +16,7 @@ router.get("/", async function (req, res, next) {
 router.get("/momentsOfJoy", async function (req, res, next) {
 	try {
 		const results = await db(
-			"SELECT date, moment_of_joy FROM journal_entries;"
+			"SELECT id, date, moment_of_joy FROM journal_entries WHERE moment_of_joy IS NOT NULL;"
 		);
 		res.send(results.data);
 	} catch (err) {
