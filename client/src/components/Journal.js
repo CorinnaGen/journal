@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Outlet, Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "../App.css";
 
@@ -87,44 +87,57 @@ export default function Journal() {
 
 	return (
 		<div>
-			<button className="btn bg-test1">test1</button>{" "}
+			<br />
+			{/* <button className="btn bg-test1">test1</button>{" "}
 			<button className="btn bg-test2">test2</button>{" "}
 			<button className="btn bg-test3">test3</button>{" "}
 			<button className="btn bg-test4">test4</button>{" "}
 			<button className="btn bg-test5">test5</button>{" "}
 			<button className="btn bg-test6">test6</button>{" "}
-			<button className="btn bg-test7">test7</button>{" "}
-			<div className="container">
-				<h3> My Journal </h3> <hr />
-				<table className="table table-striped">
-					<thead className="table bg-test5">
+			<button className="btn bg-test7">test7</button>{" "} */}
+			<div className="container bg-light shadow">
+				<h3 className="test5"> My Journal </h3> <hr />
+				<table className="table table-bordered table-striped shadow">
+					<thead className="table text-light bg-test5">
 						<tr>
-							<th scope="col">Date</th>
-							<th scope="col">Title</th>
+							<th className="col-3">Date</th>
+							<th className="col-6">Title</th>
+							<th className="col-3">View Entry</th>
 						</tr>
 					</thead>
 					<tbody>
 						{entries &&
 							entries.map((entry) => (
-								<tr
-									key={entry.id}
-									onClick={() => navigate(`/journal/${entry.id}`)}
-								>
+								<tr key={entry.id}>
 									<td>{entry.date}</td>
 									<td>{entry.title}</td>
-									{/* <Link to={`/journal/${entry.id}`}>{entry.date}</Link> */}
+									<td
+										className="test5"
+										// className="text-info"
+										onClick={() => navigate(`/journal/${entry.id}`)}
+									>
+										Click Here!
+									</td>
 								</tr>
 							))}
 					</tbody>
 				</table>
+				<br />
 				<Link to={`/journal/newentry`}>
-					<button className="btn-dark"> Add New Entry</button>
+					<button type="button" className="btn bg-test6 btn-test6">
+						Add New Entry
+					</button>
 				</Link>
 				<hr />
-				{selectedMemory && selectedMemory.moment_of_joy
-					? `Moment of joy from ${selectedMemory.date}: ${selectedMemory.moment_of_joy}`
-					: `"${selectedQuote.quote}" -${selectedQuote.author}`}
-			</div>
+				<h5 className="test5">
+					{selectedMemory && selectedMemory.moment_of_joy
+						? `Moment of joy from ${selectedMemory.date}: ${selectedMemory.moment_of_joy}`
+						: `"${selectedQuote.quote}" -${selectedQuote.author}`}{" "}
+				</h5>
+				<br />
+				<br />
+			</div>{" "}
+			<br />
 		</div>
 	);
 }

@@ -35,45 +35,71 @@ function NewEntry({ addEntry }) {
 
 	return (
 		<div>
-			<form onSubmit={handleSubmit}>
-				<h1>Add New Entry</h1>
-				<label>Date</label>
-				<input
-					name="date"
-					type="text"
-					value={date}
-					onChange={handleInputChange}
-				/>
-				<label>Title</label>
-				<input
-					name="title"
-					type="text"
-					value={title}
-					onChange={handleInputChange}
-				/>
-				<label>Mood</label>
-				<input
-					name="mood"
-					type="text"
-					value={mood}
-					onChange={handleInputChange}
-				/>
-				<label>Entry</label>
-				<input
-					name="entry_text"
-					type="text"
-					value={entry_text}
-					onChange={handleInputChange}
-				/>
-				<label>Moment of joy</label>
-				<input
-					name="moment_of_joy"
-					type="text"
-					value={moment_of_joy}
-					onChange={handleInputChange}
-				/>
-				<button>Submit</button>
-			</form>
+			<br />
+			<div className="container bg-light shadow">
+				<form onSubmit={handleSubmit}>
+					<h3>New Journal Entry</h3> <hr />
+					<div className="row">
+						<div className="col-3">
+							<label>Date</label> <br />
+							<input
+								className="form-control"
+								name="date"
+								type="text"
+								value={date}
+								onChange={handleInputChange}
+							/>
+						</div>
+						<div className="col-6">
+							<label>Title</label> <br />
+							<input
+								className="form-control"
+								name="title"
+								type="text"
+								value={title}
+								onChange={handleInputChange}
+							/>{" "}
+						</div>
+						<div className="col-3">
+							<label>Mood</label> <br />
+							<input
+								className="form-control"
+								name="mood"
+								type="text"
+								value={mood}
+								onChange={handleInputChange}
+							/>
+						</div>
+					</div>
+					<div className="row">
+						<div>
+							<label>Entry</label> <br />
+							<textarea
+								className="form-control"
+								name="entry_text"
+								value={entry_text}
+								onChange={handleInputChange}
+							/>
+						</div>
+					</div>
+					<div className="row">
+						<div>
+							<label>Moment of joy</label>
+							<input
+								className="form-control"
+								name="moment_of_joy"
+								type="text"
+								value={moment_of_joy}
+								onChange={handleInputChange}
+							/>
+						</div>
+					</div>{" "}
+					<br />
+					<button className="btn btn-test6">Submit</button>
+				</form>
+				<br />
+			</div>
+			<br />
 		</div>
 	);
 }

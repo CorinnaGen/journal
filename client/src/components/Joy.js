@@ -13,33 +13,42 @@ export default function Joy() {
 		} catch (err) {
 			console.log(err);
 		}
-	}, [entries]);
+	}, []);
 
 	return (
-		<div className="container">
-			<h3>My Moments of Joy: </h3>
-			<hr />
-
-			<table className="table table-striped">
-				<thead className="table-dark">
-					<tr>
-						<th scope="col">Date</th>
-						<th scope="col">Moment of Joy</th>
-					</tr>
-				</thead>
-				<tbody>
-					{entries &&
-						entries.map(
-							(entry) =>
-								entry.moment_of_joy && (
-									<tr key={entry.id}>
-										<td>{entry.date}</td>
-										<td>{entry.moment_of_joy}</td>
-									</tr>
-								)
-						)}
-				</tbody>
-			</table>
+		<div>
+			{" "}
+			<br />
+			<div className="container bg-white">
+				<h3>My Moments of Joy: </h3>
+				<hr />
+				{/* <div class="card"> */}
+				<div className=" table-responsive">
+					<table className="table table-bordered table-striped">
+						<thead className="table bg-test5 text-light">
+							<tr>
+								<th scope="col">Date</th>
+								<th scope="col">Moment of Joy</th>
+							</tr>
+						</thead>
+						<tbody>
+							{entries &&
+								entries.map(
+									(entry) =>
+										entry.moment_of_joy && (
+											<tr key={entry.id}>
+												<td>{entry.date}</td>
+												<td>{entry.moment_of_joy}</td>
+											</tr>
+										)
+								)}
+						</tbody>
+					</table>
+					{/* </div> */}
+				</div>{" "}
+				<br />
+			</div>
+			<br />
 		</div>
 	);
 }

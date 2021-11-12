@@ -13,9 +13,9 @@ import "./App.css";
 
 function App() {
 	return (
-		<BrowserRouter>
-			<div className="container">
-				<nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-test5">
+		<div className="app">
+			<BrowserRouter>
+				<nav className="navbar sticky-top shadow navbar-expand-lg navbar-dark bg-test5">
 					<div className="container">
 						<a className="navbar-brand" href="#">
 							Navbar
@@ -48,20 +48,21 @@ function App() {
 							</div>
 						</div>
 					</div>
-				</nav>{" "}
-			</div>
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="/journal/joys" element={<Joy />} />
-				<Route path="/safetyplan" element={<SafetyPlan />} />
-				<Route path="/safetyplan/:id/newplan" element={<SafetyPlanEntry />} />
+				</nav>
 
-				<Route path="/Journal" element={<Journal />} />
-				<Route path="/journal/:id" element={<JournalEntry />} />
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/journal/joys" element={<Joy />} />
+					<Route path="/safetyplan" element={<SafetyPlan />} />
+					<Route path="/safetyplan/:id/newplan" element={<SafetyPlanEntry />} />
 
-				<Route path="/journal/NewEntry" element={<NewEntry />} />
-			</Routes>
-		</BrowserRouter>
+					<Route path="/Journal" element={<Journal />} />
+					<Route path="/journal/:id" element={<JournalEntry />} />
+
+					<Route path="/journal/NewEntry" element={<NewEntry />} />
+				</Routes>
+			</BrowserRouter>
+		</div>
 	);
 }
 

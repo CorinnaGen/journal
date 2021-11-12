@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import "../App.css";
 
 export default function JournalEntry() {
@@ -18,16 +18,46 @@ export default function JournalEntry() {
 
 	return (
 		<div>
-			<h1>Title </h1>
-			{entry.title}
-			<h3>date </h3>
-			{entry.date}
-			<h3>Entry </h3>
-			{entry.entry_text}
-			<h3>Mood </h3>
-			{entry.mood}
-			<h3>Joy</h3>
-			{entry.moment_of_joy}
+			<br />
+			<div className="container bg-light shadow">
+				<h3>Journal Entry #{entry.id}</h3> <hr />
+				<div className="row">
+					<div className="col-3">
+						<h6>Date:</h6>
+						<p className="bg-white border rounded">{entry.date}</p>
+					</div>
+					<div className="col-5">
+						<h6>Title: </h6>
+						<p className="bg-white border rounded"> {entry.title}</p>
+					</div>
+					<div className="col-4">
+						<h6>Mood: </h6>
+						<p className="bg-white border rounded"> {entry.mood}</p>
+					</div>
+				</div>
+				<div className="row">
+					<div className="col">
+						<h5>Journal Entry: </h5>
+						<p className="bg-white border rounded">{entry.entry_text}</p>
+					</div>
+				</div>
+				<div>
+					{entry.moment_of_joy && (
+						<div className="row">
+							<div className="col">
+								<h6>Moment of Joy </h6>
+								<p className="bg-white border rounded">{entry.moment_of_joy}</p>
+							</div>
+						</div>
+					)}
+				</div>
+				<Link to={`/journal`}>
+					<button className="btn bg-test6 btn-test6">Go back </button>{" "}
+				</Link>
+				<br />
+				<br />
+			</div>
+			<br />
 		</div>
 	);
 }
