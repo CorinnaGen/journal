@@ -107,7 +107,9 @@ router.delete(
 			await db(
 				`DELETE FROM sp_resources WHERE id = "${id}" and sp_id = "${sp_id}";`
 			);
-			const results = await db("SELECT * FROM sp_resources;");
+			const results = await db(
+				`SELECT * FROM sp_resources WHERE sp_id="${sp_id}";`
+			);
 			res.send(results.data);
 		} catch (err) {
 			res.status(500).send(err);
@@ -116,12 +118,3 @@ router.delete(
 );
 
 module.exports = router;
-
-// mysql> insert into sp_resources (name, info, type, sp_id) values ("third name", "third email", 1, 1);
-
-// insert into sp_resources (name, info, type, sp_id) values ("first friend", "friend1 email", 2, 2)
-// insert into sp_resources (name, info, type, sp_id) values ("second friend", "friend2 email", 2, 2)
-// insert into sp_resources (name, info, type, sp_id) values ("third friend", "friend3 email", 2, 2);
-
-// insert into sp_identifiers (type, text, sp_id) values ("ebwbhj", "tewjhfbh", 1);
-// insert into sp_identifiers (type, text, sp_id) values ("behjbw", "s hqwbehfbheko", 2);

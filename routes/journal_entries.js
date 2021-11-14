@@ -44,7 +44,9 @@ router.post("/", async function (req, res, next) {
 router.delete("/:id", entryMustExist, async function (req, res, next) {
 	try {
 		await db(`DELETE FROM journal_entries WHERE id = "${req.entry.id}";`);
-		const results = await db("SELECT * FROM journal_entries;");
+		const results = await db(
+			`SELECT * FROM journal_entries WHERE id = "${req.entry.id}";`
+		);
 		res.send(results.data);
 	} catch (err) {
 		res.status(500).send(err);
@@ -53,7 +55,7 @@ router.delete("/:id", entryMustExist, async function (req, res, next) {
 
 router.put("/:id", entryMustExist, async function (req, res, next) {
 	try {
-		const { title, entry_text, moment_of_joy, mood } = req.body;
+		const { title, entry_text, moment_of_joy, mood, date } = req.body;
 
 		if (entry_text) {
 			await db(
@@ -75,6 +77,11 @@ router.put("/:id", entryMustExist, async function (req, res, next) {
 				`UPDATE journal_entries SET title = "${title}" WHERE id ="${req.entry.id}";`
 			);
 		}
+		if (date) {
+			await db(
+				`UPDATE journal_entries SET date = "${date}" WHERE id ="${req.entry.id}";`
+			);
+		}
 
 		const results = await db("SELECT * FROM journal_entries;");
 		res.send(results.data);
@@ -84,12 +91,3 @@ router.put("/:id", entryMustExist, async function (req, res, next) {
 });
 
 module.exports = router;
-
-// UPDATE journal_entries SET entry_text = "updating entry text", moment_of_joy = "updating moment of joy" WHERE entry_id=4;
-
-// {"date": "11/22",
-// "title" : "First time in a while...",
-// "moment_of_joy" :"making this work",
-// "mood" : "Thrilled",
-// "entry_text" : "This is the life"
-// }

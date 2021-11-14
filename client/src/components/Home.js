@@ -1,24 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import journalpic from "../Photos/myjournal.png";
+import sfplanpic from "../Photos/mysafetyplan.png";
+import joypic from "../Photos/mymomentsofjoy.png";
 
 import "../App.css";
 
 export default function Home() {
 	return (
-		<div>
-			<br />
-			<div className="container shadow bg-light">
-				<h3 className="test5">Welcome!</h3> <hr />
+		<div className="container shadow bg-light mt-4 mb-4">
+			<h3 className="darker">Welcome!</h3> <hr />
+			<div className="text-center">
 				<Link to={`/journal/`}>
-					<img src="https://www.teachingenglish.org.uk/sites/teacheng/files/styles/large/public/og/gallery/class_journals_iStock_000021675732XSmall.jpg?itok=UJFlJ2go/" />{" "}
+					<img className="img-fluid shadow" width="50%" src={journalpic} />
 				</Link>
+				<br />
+				<br />
 				<Link to={`/journal/joys`}>
-					<img src="https://lumiere-a.akamaihd.net/v1/images/au_character_insideout_bio_joy_847d0fd9.jpeg?region=0,0,600,600" />
+					<img className="img-fluid shadow" width="50%" src={joypic} />
 				</Link>
+				<br />
+				<br />
 				<Link to={`/safetyplan`}>
-					<img src="https://www.diabnext.com/wp-content/uploads/2019/04/peer-supports.jpg" />
+					<img className="img-fluid shadow" width="50%" src={sfplanpic} />
 				</Link>
 			</div>
+			<br />
 			<br />
 		</div>
 	);

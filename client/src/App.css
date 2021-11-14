@@ -40,7 +40,7 @@
 	background-color: #ffe8d6;
 }
 .btn-test6 {
-	color: rgb(145, 163, 164);
+	color: #687d7f;
 	border-color: rgb(227, 231, 232);
 }
 .btn-test6:hover {
@@ -52,8 +52,18 @@
 	--bs-bg-opacity: 1;
 	color: rgb(145, 163, 164) !important;
 }
-.test73 {
-	color: blueviolet;
+.clickhere {
+	--bs-bg-opacity: 1;
+	color: #68727f !important;
+}
+
+.clickhere:hover {
+	color: white !important;
+	background-color: rgb(172, 176, 181);
+}
+
+.darker {
+	color: #687d7f !important;
 }
 
 /* 

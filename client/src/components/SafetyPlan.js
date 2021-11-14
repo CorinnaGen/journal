@@ -74,164 +74,158 @@ export default function SafetyPlan() {
 	//once a new "safety_plan" row has been created (aka newPlan.length >1), use effect calls this navigate:
 	const routeChange = async (planID) => {
 		navigate(`/safetyplan/${planID}/newplan`);
-		console.log(newPlan.id);
 	};
 
 	return (
-		<div>
-			{" "}
-			<br />
-			<div className="container bg-light">
-				<h3>Safety Plan </h3> <hr />
-				<div>
-					{mostRecent && mostRecent.date !== "undefined" && (
-						<h5>Created {mostRecent.date}</h5>
-					)}
-				</div>
-				<div className="row">
-					<div className="col-sm-6">
-						<div className="card">
-							<div className="card-header bg-test5 text-light">
-								Distractions:
-							</div>
-
-							<div className="card-body bg-test6 ">
-								<p className="card-text">
-									{showPlanIdentifiers.map(
-										(identifier) =>
-											identifier.sp_id === mostRecent.id &&
-											identifier.type === "Distraction" && (
-												<div>
-													<p>{identifier.text}</p>{" "}
-												</div>
-											)
-									)}
-								</p>
-							</div>
-						</div>
-					</div>
-					<div className="col-sm-6">
-						<div className="card">
-							<div className="card-header bg-test5 text-light">Triggers:</div>
-							<div className="card-body bg-test6 ">
-								<p className="card-text">
-									{showPlanIdentifiers.map(
-										(identifier) =>
-											identifier.sp_id === mostRecent.id &&
-											identifier.type === "Trigger" && <p>{identifier.text}</p>
-									)}
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>{" "}
-				<br />
-				<div className="row">
-					<div className="col-sm-6">
-						<div className="card">
-							<div className="card-header bg-test5 text-light">
-								Things that help me when I feel this way:
-							</div>
-							<div className="card-body bg-test6">
-								<p className="card-text">
-									{showPlanIdentifiers.map(
-										(identifier) =>
-											identifier.sp_id === mostRecent.id &&
-											identifier.type === "Something Helpful" && (
-												<div>
-													<p>{identifier.text}</p>{" "}
-												</div>
-											)
-									)}
-								</p>
-							</div>
-						</div>
-					</div>
-					<div className="col-sm-6">
-						<div className="card">
-							<div className="card-header bg-test5 text-light">
-								Ways to Keep My Space Safe:
-							</div>
-							<div className="card-body bg-test6">
-								<p className="card-text">
-									{showPlanIdentifiers.map(
-										(identifier) =>
-											identifier.sp_id === mostRecent.id &&
-											identifier.type === "Space safety" && (
-												<div>
-													<p>{identifier.text}</p>{" "}
-												</div>
-											)
-									)}
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<br />
-				<div className="row">
-					<div className="col-sm-6">
-						<div className="card">
-							<div className="card-header bg-test5 text-light">
-								Friends I can reach out to:
-							</div>
-
-							<div className="card-body bg-test6">
-								<p className="card-text">
-									{showPlanResources.map(
-										(resource) =>
-											resource.sp_id === mostRecent.id &&
-											resource.type === 1 && (
-												<div>
-													<h5>{resource.name}:</h5>
-													<p>{resource.info}</p>
-												</div>
-											)
-									)}
-								</p>
-							</div>
-						</div>
-					</div>
-					<div className="col-sm-6">
-						<div className="card">
-							<div className="card-header bg-test5 text-light">
-								Professional resources I can reach out to:
-							</div>
-							<div className="card-body bg-test6">
-								<p className="card-text">
-									{showPlanResources.map(
-										(resource) =>
-											resource.sp_id === mostRecent.id &&
-											resource.type === 2 && (
-												<div>
-													<h5>{resource.name}:</h5>
-													<p>{resource.info}</p>
-												</div>
-											)
-									)}
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<br />
-				{showSafetyPlan.length > 0 ? (
-					<div>
-						<Link to={`/safetyplan/${mostRecent.id}/newplan`}>
-							<button className="btn btn-test6">Update Current Plan</button>
-						</Link>{" "}
-						<button className="btn btn-test6" onClick={(e) => handleClick()}>
-							Replace Current Plan
-						</button>{" "}
-					</div>
-				) : (
-					<button className="btn btn-test6" onClick={(e) => handleClick()}>
-						Create New Plan
-					</button>
+		<div className="container bg-light mt-4">
+			<h3 className="darker">Safety Plan </h3> <hr />
+			<div>
+				{mostRecent && mostRecent.date !== "undefined" && (
+					<h5 className="darker">Created {mostRecent.date}</h5>
 				)}
-				<br />
-				<br />
-			</div>{" "}
+			</div>
+			<div className="row">
+				<div className="col-sm-6 mb-4">
+					<div className="card">
+						<div className="card-header bg-test5 text-light">Distractions:</div>
+						<div className="card-body bg-test6 ">
+							<p className="card-text">
+								{showPlanIdentifiers.map(
+									(identifier) =>
+										identifier.sp_id === mostRecent.id &&
+										identifier.type === "Distraction" && (
+											<div>
+												<p>{identifier.text}</p>{" "}
+											</div>
+										)
+								)}
+							</p>
+						</div>
+					</div>
+				</div>
+				<div className="col-sm-6 mb-4">
+					<div className="card">
+						<div className="card-header bg-test5 text-light">Triggers:</div>
+						<div className="card-body bg-test6 ">
+							<p className="card-text">
+								{showPlanIdentifiers.map(
+									(identifier) =>
+										identifier.sp_id === mostRecent.id &&
+										identifier.type === "Trigger" && <p>{identifier.text}</p>
+								)}
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div className="row">
+				<div className="col-sm-6 mb-4">
+					<div className="card">
+						<div className="card-header bg-test5 text-light">
+							Things that help me when I feel this way:
+						</div>
+						<div className="card-body bg-test6">
+							<p className="card-text">
+								{showPlanIdentifiers.map(
+									(identifier) =>
+										identifier.sp_id === mostRecent.id &&
+										identifier.type === "Something Helpful" && (
+											<div>
+												<p>{identifier.text}</p>{" "}
+											</div>
+										)
+								)}
+							</p>
+						</div>
+					</div>
+				</div>
+				<div className="col-sm-6 mb-4">
+					<div className="card">
+						<div className="card-header bg-test5 text-light">
+							Ways to Keep My Space Safe:
+						</div>
+						<div className="card-body bg-test6">
+							<p className="card-text">
+								{showPlanIdentifiers.map(
+									(identifier) =>
+										identifier.sp_id === mostRecent.id &&
+										identifier.type === "Space safety" && (
+											<div>
+												<p>{identifier.text}</p>{" "}
+											</div>
+										)
+								)}
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div className="row">
+				<div className="col-sm-6 mb-4">
+					<div className="card">
+						<div className="card-header bg-test5 text-light">
+							Friends I can reach out to:
+						</div>
+						<div className="card-body bg-test6">
+							<p className="card-text">
+								{showPlanResources.map(
+									(resource) =>
+										resource.sp_id === mostRecent.id &&
+										resource.type === 1 && (
+											<div>
+												<h5>{resource.name}:</h5>
+												<p>{resource.info}</p>
+											</div>
+										)
+								)}
+							</p>
+						</div>
+					</div>
+				</div>
+				<div className="col-sm-6 mb-4">
+					<div className="card">
+						<div className="card-header bg-test5 text-light">
+							Professional resources I can reach out to:
+						</div>
+						<div className="card-body bg-test6">
+							<p className="card-text">
+								{showPlanResources.map(
+									(resource) =>
+										resource.sp_id === mostRecent.id &&
+										resource.type === 2 && (
+											<div>
+												<h5>{resource.name}:</h5>
+												<p>{resource.info}</p>
+											</div>
+										)
+								)}
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			{showSafetyPlan.length > 0 ? (
+				<div>
+					<Link to={`/safetyplan/${mostRecent.id}/newplan`}>
+						<button className="btn bg-test6 btn-test6">
+							Update Current Plan
+						</button>
+					</Link>{" "}
+					<button
+						className="btn bg-test6 btn-test6"
+						onClick={(e) => handleClick()}
+					>
+						Replace Current Plan
+					</button>
+				</div>
+			) : (
+				<button
+					className="btn bg-test6 btn-test6"
+					onClick={(e) => handleClick()}
+				>
+					Create New Plan
+				</button>
+			)}
 			<br />
 		</div>
 	);

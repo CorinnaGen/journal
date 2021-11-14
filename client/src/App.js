@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import mainlogo from "./Photos/logo.png";
 
-import React, { useState } from "react";
+import React from "react";
 import Home from "./components/Home";
 import NewEntry from "./components/NewEntry";
 import JournalEntry from "./components/JournalEntry";
@@ -8,6 +9,8 @@ import Journal from "./components/Journal";
 import SafetyPlan from "./components/SafetyPlan";
 import SafetyPlanEntry from "./components/SafetyPlanEntry";
 import Joy from "./components/Joy";
+import AddJoy from "./components/AddJoy";
+import EditEntry from "./components/EditEntry";
 
 import "./App.css";
 
@@ -17,8 +20,8 @@ function App() {
 			<BrowserRouter>
 				<nav className="navbar sticky-top shadow navbar-expand-lg navbar-dark bg-test5">
 					<div className="container">
-						<a className="navbar-brand" href="#">
-							Navbar
+						<a className="navbar-brand" href={`/`}>
+							<img width="50" height="50" src={mainlogo} />
 						</a>
 						<button
 							className="navbar-toggler"
@@ -39,6 +42,7 @@ function App() {
 								<a className="nav-link" href={`/journal`}>
 									Journal
 								</a>
+
 								<a className="nav-link" href={`/journal/joys`}>
 									Moments of Joy
 								</a>
@@ -52,12 +56,15 @@ function App() {
 
 				<Routes>
 					<Route path="/" element={<Home />} />
-					<Route path="/journal/joys" element={<Joy />} />
+					<Route path="/journal/joys" element={<Joy />}>
+						<Route path="/journal/joys/add" element={<AddJoy />} />
+					</Route>
 					<Route path="/safetyplan" element={<SafetyPlan />} />
 					<Route path="/safetyplan/:id/newplan" element={<SafetyPlanEntry />} />
 
 					<Route path="/Journal" element={<Journal />} />
 					<Route path="/journal/:id" element={<JournalEntry />} />
+					<Route path="/journal/:id/edit" element={<EditEntry />} />
 
 					<Route path="/journal/NewEntry" element={<NewEntry />} />
 				</Routes>

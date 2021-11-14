@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "../App.css";
 
-function NewEntry({ addEntry }) {
+function NewEntry() {
 	const [entry, setEntry] = useState({
 		date: "",
 		title: "",
@@ -35,10 +36,9 @@ function NewEntry({ addEntry }) {
 
 	return (
 		<div>
-			<br />
-			<div className="container bg-light shadow">
+			<div className="container bg-light shadow mt-4">
 				<form onSubmit={handleSubmit}>
-					<h3>New Journal Entry</h3> <hr />
+					<h3 className="darker">New Journal Entry</h3> <hr />
 					<div className="row">
 						<div className="col-3">
 							<label>Date</label> <br />
@@ -95,7 +95,12 @@ function NewEntry({ addEntry }) {
 						</div>
 					</div>{" "}
 					<br />
-					<button className="btn btn-test6">Submit</button>
+					<button className="btn btn-test6 bg-test6">Submit</button>{" "}
+					<Link to={`/journal`}>
+						<button className="btn bg-test6 btn-test6">
+							Go Back to My Journal{" "}
+						</button>
+					</Link>
 				</form>
 				<br />
 			</div>
