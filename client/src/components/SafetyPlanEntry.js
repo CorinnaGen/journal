@@ -6,13 +6,13 @@ import "../App.css";
 
 export default function SafetyPlanEntry() {
 	let { id } = useParams();
-	const [safetyPlanIdentifier, setSafetyPlanIdentifier] = useState({
+	const [newIdentifier, setNewIdentifier] = useState({
 		type: "", // "triggers" "space safety" "distractions" "helpful things"
 		text: "",
 		sp_id: id,
 	});
 
-	const [safetyPlanResource, setSafetyPlanResource] = useState({
+	const [newResource, setNewResource] = useState({
 		name: "",
 		info: "",
 		type: "", //boolean ~ professional or personal
@@ -55,48 +55,54 @@ export default function SafetyPlanEntry() {
 
 	const handleResourceChange = (e) => {
 		const { value, name } = e.target;
-		setSafetyPlanResource((state) => ({ ...state, [name]: value }));
+		setNewResource((state) => ({ ...state, [name]: value }));
 	};
 	const handleIdentifierChange = (e) => {
 		const { value, name } = e.target;
-		setSafetyPlanIdentifier((state) => ({ ...state, [name]: value }));
+		setNewIdentifier((state) => ({ ...state, [name]: value }));
 	};
 	const handleDateChange = (e) => {
 		setDate({ date: e.target.value });
 	};
 
 	const handleIdentifierSubmit = async (e) => {
+		console.log(e);
+		e.preventDefault();
 		try {
 			const res = await fetch(`/safetyplan/${id}/identifiers`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify(safetyPlanIdentifier),
+				body: JSON.stringify(newIdentifier),
 			});
 			const data = await res.json();
-			setSafetyPlanIdentifier(data);
+			setShowPlanIdentifiers(data);
 		} catch (err) {
 			console.log(err);
 		}
+		setNewIdentifier({ type: "", text: "" });
 	};
 	const handleResourceSubmit = async (e) => {
+		e.preventDefault();
 		try {
 			const res = await fetch(`/safetyplan/${id}/resources`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify(safetyPlanResource),
+				body: JSON.stringify(newResource),
 			});
 			const data = await res.json();
-			setSafetyPlanResource(data);
+			setShowPlanResources(data);
 		} catch (err) {
 			console.log(err);
 		}
+		setNewResource({ name: "", info: "", type: "" });
 	};
 
 	const updateDate = async (e) => {
+		e.preventDefault();
 		try {
 			const res = await fetch(`/safetyplan/${id}/`, {
 				method: "Put",
@@ -106,7 +112,7 @@ export default function SafetyPlanEntry() {
 				body: JSON.stringify(date),
 			});
 			const data = await res.json();
-			setDate(data);
+			setShowSafetyPlan(data);
 		} catch (err) {
 			console.log(err);
 		}
@@ -136,8 +142,8 @@ export default function SafetyPlanEntry() {
 		}
 	};
 
-	const heading = (safetyPlanIdentifier) => {
-		switch (safetyPlanIdentifier.type) {
+	const heading = (newIdentifier) => {
+		switch (newIdentifier.type) {
 			case "Trigger":
 				return "How I know I don't feel well:";
 
@@ -151,7 +157,7 @@ export default function SafetyPlanEntry() {
 				return "Ways to keep my space safe:";
 
 			default:
-				return "Add triggers, distractions, helpful things, and ways to keep your space";
+				return "Add distractions, ways to keep your space safe, triggers, and things that help when you don't feel well";
 		}
 	};
 
@@ -172,13 +178,14 @@ export default function SafetyPlanEntry() {
 								showSafetyPlan[0].date
 							) : (
 								<form>
-									<div class="input-group">
+									<div className="input-group">
 										<input
 											className="form-control"
 											name="date"
 											type="text"
 											value={date.date}
 											onChange={handleDateChange}
+											required
 										/>
 										<button
 											className="btn btn-test6 bg-test6 ms-1"
@@ -186,7 +193,7 @@ export default function SafetyPlanEntry() {
 											type="submit"
 										>
 											Add Date
-										</button>{" "}
+										</button>
 									</div>
 								</form>
 							)}
@@ -200,22 +207,22 @@ export default function SafetyPlanEntry() {
 							Good ways to distract myself:
 						</div>
 						<div className="card-body bg-test6 ">
-							<p className="card-text">
+							<div className="card-text">
 								{showPlanIdentifiers.map(
 									(identifier) =>
 										identifier.type === "Distraction" && (
-											<div className="row">
+											<div className="row" key={identifier.id}>
 												<h6 className="col-6">{identifier.text}</h6>
 												<button
 													onClick={() => deleteIdentifier(identifier.id)}
-													className="col-6 mb-3 btn btn-danger"
+													className="col-6 mb-3 btn btn-delete"
 												>
 													Delete
 												</button>
 											</div>
 										)
 								)}
-							</p>
+							</div>
 						</div>
 					</div>
 					<div className="col-sm-6 mb-4">
@@ -223,22 +230,22 @@ export default function SafetyPlanEntry() {
 							Ways to keep my space safe:
 						</div>
 						<div className="card-body bg-test6 ">
-							<p className="card-text">
+							<div className="card-text">
 								{showPlanIdentifiers.map(
 									(identifier) =>
 										identifier.type === "Space safety" && (
-											<div className="row">
+											<div className="row" key={identifier.id}>
 												<h6 className="col-6">{identifier.text}</h6>
 												<button
 													onClick={() => deleteIdentifier(identifier.id)}
-													className="col-6 mb-3 btn btn-danger"
+													className="col-6 mb-3 btn btn-delete"
 												>
 													Delete
 												</button>
 											</div>
 										)
 								)}
-							</p>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -248,22 +255,22 @@ export default function SafetyPlanEntry() {
 							How I know I don't feel well:
 						</div>
 						<div className="card-body bg-test6 ">
-							<p className="card-text">
+							<div className="card-text">
 								{showPlanIdentifiers.map(
 									(identifier) =>
 										identifier.type === "Trigger" && (
-											<div className="row">
+											<div className="row" key={identifier.id}>
 												<h6 className="col-6">{identifier.text}</h6>
 												<button
 													onClick={() => deleteIdentifier(identifier.id)}
-													className="col-6 mb-3 btn btn-danger"
+													className="col-6 mb-3 btn btn-delete"
 												>
 													Delete
 												</button>
 											</div>
 										)
 								)}
-							</p>
+							</div>
 						</div>
 					</div>
 					<div className="col-sm-6 mb-4">
@@ -271,27 +278,27 @@ export default function SafetyPlanEntry() {
 							Things that help when I feel this way:
 						</div>
 						<div className="card-body bg-test6 ">
-							<p className="card-text">
+							<div className="card-text">
 								{showPlanIdentifiers.map(
 									(identifier) =>
 										identifier.type === "Something Helpful" && (
-											<div className="row">
+											<div className="row" key={identifier.id}>
 												<h6 className="col-6">{identifier.text}</h6>
 												<button
 													onClick={() => deleteIdentifier(identifier.id)}
-													className="col-6 mb-3 btn btn-danger"
+													className="col-6 mb-3 btn btn-delete"
 												>
 													Delete
 												</button>
 											</div>
 										)
 								)}
-							</p>
+							</div>
 						</div>
 					</div>
 				</div>
 				<hr />
-				<form>
+				<form onSubmit={handleIdentifierSubmit}>
 					<h4 className="darker">
 						Add distractions, ways to keep your space safe, triggers, and things
 						that help when you don't feel well:
@@ -300,31 +307,32 @@ export default function SafetyPlanEntry() {
 						className="btn bg-test5 text-light dropdown-toggle"
 						name="type"
 						onChange={handleIdentifierChange}
+						value={newIdentifier.type}
+						required
 					>
-						<option defaultValue> Choose one </option>
+						<option disabled selected value="">
+							Choose one
+						</option>
 						<option value="Distraction">Good ways to distract myself:</option>
 						<option value="Space safety">Ways to keep my space safe:</option>
 						<option value="Trigger">How I know I don't feel well:</option>
 						<option value="Something Helpful">
 							Things that help when I feel this way:
 						</option>
-					</select>{" "}
+					</select>
 					<br />
 					<br />
 					<input
 						className="form-control "
-						placeholder={heading(safetyPlanIdentifier)}
-						value={safetyPlanIdentifier.text}
+						placeholder={heading(newIdentifier)}
+						value={newIdentifier.text}
 						onChange={handleIdentifierChange}
 						name="text"
-					/>{" "}
+						required
+					/>
 					<br />
-					<button
-						className="btn bg-test6 btn-test6"
-						onClick={handleIdentifierSubmit}
-						type="submit"
-					>
-						Add{" "}
+					<button className="btn bg-test6 btn-test6" type="submit">
+						Add
 					</button>
 				</form>
 				<hr />
@@ -333,56 +341,60 @@ export default function SafetyPlanEntry() {
 					People I can contact when I'm not feeling well:
 				</h4>
 				<div className="row">
-					<div className="col-sm-6">
+					<div className="col-sm-6 mb-4">
 						<div className="card">
 							<div className="card-header bg-test5 text-light">
 								Friends I can reach out to:
 							</div>
 
 							<div className="card-body bg-test6">
-								<p className="card-text">
+								<div className="card-text">
 									{showPlanResources.map(
 										(resource) =>
 											resource.type === 1 && (
-												<div>
-													<h5>{resource.name}:</h5>
-													<p>{resource.info}</p>
+												<div className="row" key={resource.id}>
+													<div className="col">
+														<h5>{resource.name}:</h5>
+														<p>{resource.info}</p>
+													</div>
 													<button
 														onClick={() => deleteResource(resource.id)}
-														className="col-6 mb-3 btn btn-danger"
+														className="col btn btn-delete m-3"
 													>
 														Delete
 													</button>
 												</div>
 											)
 									)}
-								</p>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div className="col-sm-6">
+					<div className="col-sm-6 mb-4">
 						<div className="card">
 							<div className="card-header bg-test5 text-light">
 								Professional resources I can reach out to:
 							</div>
 							<div className="card-body bg-test6">
-								<p className="card-text">
+								<div className="card-text">
 									{showPlanResources.map(
 										(resource) =>
 											resource.type === 2 && (
-												<div>
-													<h5>{resource.name}:</h5>
-													<p>{resource.info}</p>
+												<div className="row" key={resource.id}>
+													<div className="col">
+														<h5>{resource.name}:</h5>
+														<p>{resource.info}</p>
+													</div>
 													<button
 														onClick={() => deleteResource(resource.id)}
-														className="col-6 mb-3 btn btn-danger"
+														className="col btn btn-delete m-3"
 													>
 														Delete
 													</button>
 												</div>
 											)
 									)}
-								</p>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -396,8 +408,12 @@ export default function SafetyPlanEntry() {
 								className="btn bg-test5 text-light dropdown-toggle"
 								name="type"
 								onChange={handleResourceChange}
+								value={newResource.type}
+								required
 							>
-								<option defaultValue> Choose type of support </option>
+								<option disabled selected value="">
+									Choose type of support
+								</option>
 								<option value="1">Friend</option>
 								<option value="2">Professional</option>
 							</select>
@@ -411,8 +427,9 @@ export default function SafetyPlanEntry() {
 								className="form-control "
 								name="name"
 								type="text"
-								value={safetyPlanResource.name}
+								value={newResource.name}
 								onChange={handleResourceChange}
+								required
 							/>
 						</div>
 						<div className="col-5">
@@ -421,8 +438,9 @@ export default function SafetyPlanEntry() {
 								className="form-control "
 								name="info"
 								type="text"
-								value={safetyPlanResource.info}
+								value={newResource.info}
 								onChange={handleResourceChange}
+								required
 							/>
 						</div>
 					</div>

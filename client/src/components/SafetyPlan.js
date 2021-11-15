@@ -227,6 +227,7 @@ export default function SafetyPlan() {
 				</button>
 			)}
 			<br />
+			<br />
 		</div>
 	);
 }

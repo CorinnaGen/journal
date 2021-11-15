@@ -32,9 +32,10 @@ export default function Journal() {
 				<thead className="table text-light bg-test5">
 					<tr>
 						<th className="col-1">Entry # </th>
-						<th className="col-3">Date</th>
+						<th className="col-2">Date</th>
 						<th className="col-5">Title</th>
-						<th className="col-3">View Entry</th>
+						<th className="col-2">View Entry</th>
+						<th className="col-2">Edit Entry</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -51,11 +52,17 @@ export default function Journal() {
 								<td>
 									{entry.title && entry.title !== "undefined"
 										? entry.title
-										: "No Title"}
+										: `Moment of Joy: ${entry.moment_of_joy}`}
 								</td>
 								<td
 									className="clickhere"
 									onClick={() => navigate(`/journal/${entry.id}`)}
+								>
+									Click Here!
+								</td>
+								<td
+									className="clickhere"
+									onClick={() => navigate(`/journal/${entry.id}/edit`)}
 								>
 									Click Here!
 								</td>
@@ -75,6 +82,7 @@ export default function Journal() {
 					? `Moment of joy from ${selectedMemory.date}: ${selectedMemory.moment_of_joy}`
 					: `"${selectedQuote.quote}" -${selectedQuote.author}`}{" "}
 			</h5>
+			<br />
 		</div>
 	);
 }

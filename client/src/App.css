@@ -47,6 +47,15 @@
 	background-color: rgb(145, 163, 164);
 	color: rgb(227, 231, 232);
 }
+.btn-delete {
+	color: #ae6969;
+	background-color: #dbbcbc;
+}
+
+.btn-delete:hover {
+	color: #dbbcbc;
+	background-color: #ae6969;
+}
 
 .test5 {
 	--bs-bg-opacity: 1;
@@ -104,3 +113,5 @@ rem
 rem
 ;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out; */
+
+/* redish: a490a2 */

@@ -49,7 +49,9 @@ router.post("/:sp_id/identifiers", async function (req, res, next) {
 		await db(
 			`INSERT INTO sp_identifiers (type, text, sp_id) VALUES ("${type}","${text}", ${sp_id});`
 		);
-		const results = await db("SELECT * FROM sp_identifiers;");
+		const results = await db(
+			`SELECT * FROM sp_identifiers WHERE sp_id = ${sp_id};`
+		);
 		res.send(results.data);
 	} catch (err) {
 		res.status(500).send(err);
@@ -71,7 +73,7 @@ router.put(
 			}
 			if (text) {
 				await db(
-					`UPDATE sp_identifiers SET info = "${text}" WHERE id ="${id}";`
+					`UPDATE sp_identifiers SET text = "${text}" WHERE id ="${id}";`
 				);
 			}
 			const results = await db(

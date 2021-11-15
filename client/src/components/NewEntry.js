@@ -48,6 +48,7 @@ function NewEntry() {
 								type="text"
 								value={date}
 								onChange={handleInputChange}
+								required
 							/>
 						</div>
 						<div className="col-6">
@@ -58,6 +59,7 @@ function NewEntry() {
 								type="text"
 								value={title}
 								onChange={handleInputChange}
+								required
 							/>{" "}
 						</div>
 						<div className="col-3">

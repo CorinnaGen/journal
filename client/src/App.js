@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import mainlogo from "./Photos/logo.png";
 
-import React from "react";
+import React, { useState } from "react";
 import Home from "./components/Home";
 import NewEntry from "./components/NewEntry";
 import JournalEntry from "./components/JournalEntry";
@@ -56,9 +56,8 @@ function App() {
 
 				<Routes>
 					<Route path="/" element={<Home />} />
-					<Route path="/journal/joys" element={<Joy />}>
-						<Route path="/journal/joys/add" element={<AddJoy />} />
-					</Route>
+					<Route path="/journal/joys/*" element={<Joy />} />
+
 					<Route path="/safetyplan" element={<SafetyPlan />} />
 					<Route path="/safetyplan/:id/newplan" element={<SafetyPlanEntry />} />
 

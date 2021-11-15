@@ -4,7 +4,7 @@ import "../App.css";
 
 export default function EditEntry() {
 	const { id } = useParams();
-	const [entry, setEntry] = useState([""]);
+	const [entry, setEntry] = useState([]);
 
 	useEffect(async () => {
 		try {
@@ -23,17 +23,15 @@ export default function EditEntry() {
 
 	useEffect(() => {
 		if (entry.length === 0 || entry.message === "Entry not found") {
-			routeChange("/journal");
+			navigate("/journal");
 		}
 	}, [entry]);
 
 	let navigate = useNavigate();
 
-	const routeChange = async (route) => {
-		navigate(route);
-	};
-
 	const handleSubmit = async (e) => {
+		e.preventDefault();
+
 		try {
 			const res = await fetch(`/journal_entries/${id}`, {
 				method: "PUT",
@@ -47,6 +45,7 @@ export default function EditEntry() {
 		} catch (err) {
 			console.log(err);
 		}
+		navigate(`/journal/${id}`);
 	};
 	const deleteEntry = async () => {
 		try {
@@ -63,7 +62,7 @@ export default function EditEntry() {
 	return (
 		<div className="container bg-light shadow mt-4">
 			<form onSubmit={handleSubmit}>
-				<h3 className="darker">Edit Journal Entry #{entry.id}</h3> <hr />
+				<h3 className="darker">Edit Journal Entry #{id}</h3> <hr />
 				<div className="row">
 					<div className="col-3">
 						<label>Date</label> <br />
@@ -123,14 +122,13 @@ export default function EditEntry() {
 				</div>{" "}
 				<br />
 				<button className="btn btn-test6 bg-test6">Make Changes</button>
-				<Link to={`/journal/${id}`}>
-					<button className="btn bg-test6 btn-test6">Go Back to Entry </button>
-				</Link>
 			</form>
-
-			<button className="btn btn-danger" onClick={deleteEntry}>
+			<br />
+			<button className="btn btn-delete" onClick={deleteEntry}>
 				Delete Entry
 			</button>
+			<br />
+			<br />
 		</div>
 	);
 }

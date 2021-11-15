@@ -1,32 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import AddJoy from "./AddJoy";
 
 import "../App.css";
 
 export default function Joy() {
 	let [entries, setEntries] = useState([]);
 
-	useEffect(async () => {
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		getMomentsOfJoy();
+	}, []);
+
+	const getMomentsOfJoy = async () => {
 		try {
-			const response = await fetch("/journal_entries/momentsOfJoy");
+			const response = await fetch("/journal_entries/");
 			const data = await response.json();
 			setEntries(data);
 		} catch (err) {
 			console.log(err);
 		}
-	}, []);
-
-	const deleteEntry = async (id) => {
-		try {
-			const res = await fetch(`/journal_entries/${id}`, {
-				method: "DELETE",
-			});
-			const data = await res.json();
-			setEntries(data);
-		} catch (err) {
-			console.log(err);
-		}
 	};
+
+	const onDone = () => getMomentsOfJoy();
 
 	return (
 		<div>
@@ -40,7 +37,6 @@ export default function Joy() {
 								<th scope="col">Date</th>
 								<th scope="col">Moment of Joy</th>
 								<th scope="col">Edit Entry</th>
-								<th scope="col">Delete</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -51,14 +47,11 @@ export default function Joy() {
 											<tr key={entry.id}>
 												<td>{entry.date}</td>
 												<td>{entry.moment_of_joy}</td>
-												<td> Placeholder </td>
-												<td>
-													<button
-														onClick={() => deleteEntry(entry.id)}
-														className="col-6 btn btn-danger"
-													>
-														Delete
-													</button>{" "}
+												<td
+													className="clickhere"
+													onClick={() => navigate(`/journal/${entry.id}/edit`)}
+												>
+													Click Here!
 												</td>
 											</tr>
 										)
@@ -71,10 +64,11 @@ export default function Joy() {
 						Add new moment of joy
 					</button>
 				</Link>
-
-				<Outlet />
 				<br />
 				<br />
+				<Routes>
+					<Route path="add" element={<AddJoy onDone={onDone} />} />
+				</Routes>
 			</div>
 			<br />
 		</div>

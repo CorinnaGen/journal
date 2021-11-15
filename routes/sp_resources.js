@@ -2,11 +2,6 @@ var express = require("express");
 var router = express.Router();
 const db = require("../model/helper");
 const resourceMustExist = require("../guards/resourceMustExist");
-const { text } = require("express");
-
-// router.get("/", (req, res) => {
-// 	res.send("this is a test");
-// })
 
 router.get("/resources", async function (req, res, next) {
 	try {
@@ -63,7 +58,9 @@ router.post("/:sp_id/resources", async function (req, res, next) {
 		await db(
 			`INSERT INTO sp_resources (name, info, type, sp_id) VALUES ("${name}","${info}","${type}",${sp_id});`
 		);
-		const results = await db("SELECT * FROM sp_resources;");
+		const results = await db(
+			`SELECT * FROM sp_resources WHERE sp_id=${sp_id};`
+		);
 		res.send(results.data);
 	} catch (err) {
 		res.status(500).send(err);

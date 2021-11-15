@@ -36,10 +36,5 @@ CREATE TABLE `safety_plan` (
 	PRIMARY KEY (`id`)
 );
 
--- ALTER TABLE `sp_resources` ADD CONSTRAINT `sp_resources_fk0` FOREIGN KEY (`sp_id`) REFERENCES `safety_plan`(`id`);
-
--- ALTER TABLE `sp_identify` ADD CONSTRAINT `sp_identify_fk0` FOREIGN KEY (`sp_id`) REFERENCES `safety_plan`(`id`);
-
-
 
 

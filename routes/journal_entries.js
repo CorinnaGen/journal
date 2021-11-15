@@ -13,17 +13,6 @@ router.get("/", async function (req, res, next) {
 	}
 });
 
-router.get("/momentsOfJoy", async function (req, res, next) {
-	try {
-		const results = await db(
-			"SELECT id, date, moment_of_joy FROM journal_entries WHERE moment_of_joy IS NOT NULL;"
-		);
-		res.send(results.data);
-	} catch (err) {
-		res.status(500).send(err);
-	}
-});
-
 router.get("/:id", entryMustExist, function (req, res, next) {
 	res.send(req.entry);
 });
@@ -56,34 +45,35 @@ router.delete("/:id", entryMustExist, async function (req, res, next) {
 router.put("/:id", entryMustExist, async function (req, res, next) {
 	try {
 		const { title, entry_text, moment_of_joy, mood, date } = req.body;
+		const { id } = req.params;
 
 		if (entry_text) {
 			await db(
-				`UPDATE journal_entries SET entry_text = "${entry_text}" WHERE id ="${req.entry.id}";`
+				`UPDATE journal_entries SET entry_text = "${entry_text}" WHERE id ="${id}";`
 			);
 		}
 		if (moment_of_joy) {
 			await db(
-				`UPDATE journal_entries SET moment_of_joy = "${moment_of_joy}" WHERE id ="${req.entry.id}";`
+				`UPDATE journal_entries SET moment_of_joy = "${moment_of_joy}" WHERE id ="${id}";`
 			);
 		}
 		if (mood) {
 			await db(
-				`UPDATE journal_entries SET mood = "${mood}" WHERE id ="${req.entry.id}";`
+				`UPDATE journal_entries SET mood = "${mood}" WHERE id ="${id}";`
 			);
 		}
 		if (title) {
 			await db(
-				`UPDATE journal_entries SET title = "${title}" WHERE id ="${req.entry.id}";`
+				`UPDATE journal_entries SET title = "${title}" WHERE id ="${id}";`
 			);
 		}
 		if (date) {
 			await db(
-				`UPDATE journal_entries SET date = "${date}" WHERE id ="${req.entry.id}";`
+				`UPDATE journal_entries SET date = "${date}" WHERE id ="${id}";`
 			);
 		}
 
-		const results = await db("SELECT * FROM journal_entries;");
+		const results = await db(`SELECT * FROM journal_entries WHERE id = ${id};`);
 		res.send(results.data);
 	} catch (err) {
 		res.status(500).send(err);

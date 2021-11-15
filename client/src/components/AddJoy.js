@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function AddJoy() {
+export default function AddJoy({ onDone }) {
 	const [joy, setJoy] = useState({
 		date: "",
 		moment_of_joy: "",
@@ -14,6 +14,7 @@ export default function AddJoy() {
 	};
 
 	const handleSubmit = async (e) => {
+		e.preventDefault();
 		try {
 			const res = await fetch("/journal_entries", {
 				method: "POST",
@@ -27,6 +28,8 @@ export default function AddJoy() {
 		} catch (err) {
 			console.log(err);
 		}
+		setJoy({ date: "", moment_of_joy: "" });
+		onDone();
 	};
 
 	return (
@@ -43,6 +46,7 @@ export default function AddJoy() {
 							type="text"
 							value={date}
 							onChange={handleInputChange}
+							required
 						/>
 					</div>
 					<div className="col-5">
@@ -54,6 +58,7 @@ export default function AddJoy() {
 								type="text"
 								value={moment_of_joy}
 								onChange={handleInputChange}
+								required
 							/>
 						</div>
 					</div>
