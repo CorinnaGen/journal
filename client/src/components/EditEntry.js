@@ -29,9 +29,9 @@ export default function EditEntry() {
 
 	let navigate = useNavigate();
 
+	//make changes and send user back to the journal entry
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
 		try {
 			const res = await fetch(`/journal_entries/${id}`, {
 				method: "PUT",
@@ -47,6 +47,8 @@ export default function EditEntry() {
 		}
 		navigate(`/journal/${id}`);
 	};
+
+	//delete by id
 	const deleteEntry = async () => {
 		try {
 			const res = await fetch(`/journal_entries/${id}`, {

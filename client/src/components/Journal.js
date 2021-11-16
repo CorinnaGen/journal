@@ -7,6 +7,7 @@ export default function Journal() {
 	let [entries, setEntries] = useState([]);
 	let navigate = useNavigate();
 
+	//get entries
 	useEffect(async () => {
 		try {
 			const response = await fetch("/journal_entries");
@@ -19,11 +20,13 @@ export default function Journal() {
 
 	let selectedMemory;
 
+	//Random entry (to display random moment of joy)
 	if (entries.length > 0) {
 		selectedMemory = entries[Math.floor(Math.random() * entries.length)];
 	}
 
-	let selectedQuote = quotes[Math.floor(Math.random() * quotes.length)];
+	//random quote in case random entry doesnt have moment of joy
+	const selectedQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
 	return (
 		<div className="container bg-light shadow mt-4 mb-4">

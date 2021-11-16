@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import AddJoy from "./AddJoy";
+//AddJoy gets imported here, not in App.js so that onDone can be passed down to it
 
 import "../App.css";
 
@@ -23,6 +24,7 @@ export default function Joy() {
 		}
 	};
 
+	//to communicate with the addJoy component, onDone gets passed down as a prop. It triggers the journal_entries fetch so that new moments can be displayed on the parent page right away
 	const onDone = () => getMomentsOfJoy();
 
 	return (
@@ -67,6 +69,7 @@ export default function Joy() {
 				<br />
 				<br />
 				<Routes>
+					{/* onDone getting passed down: */}
 					<Route path="add" element={<AddJoy onDone={onDone} />} />
 				</Routes>
 			</div>

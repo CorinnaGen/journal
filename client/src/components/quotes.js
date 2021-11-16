@@ -1,3 +1,5 @@
+//quotes for random quote when there is no moment of joy
+
 const quotes = [
 	{
 		quote:

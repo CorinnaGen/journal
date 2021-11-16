@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
 export default function AddJoy({ onDone }) {
+	//receives "onDone" from "Joy.js"
+
 	const [joy, setJoy] = useState({
 		date: "",
 		moment_of_joy: "",
@@ -29,7 +31,7 @@ export default function AddJoy({ onDone }) {
 			console.log(err);
 		}
 		setJoy({ date: "", moment_of_joy: "" });
-		onDone();
+		onDone(); //once new joy is added, onDone is triggered for Joy.js
 	};
 
 	return (

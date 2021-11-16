@@ -8,12 +8,14 @@ export default function JournalEntry() {
 
 	let navigate = useNavigate();
 
+	//if entry doesn't exist, sends user to "/jourlal"
 	useEffect(() => {
 		if (entry.length === 0 || entry.message === "Entry not found") {
 			navigate("/journal");
 		}
 	}, [entry]);
 
+	//fetch journal entry by id from params
 	useEffect(async () => {
 		try {
 			const response = await fetch(`/journal_entries/"${id}"`);
@@ -33,6 +35,7 @@ export default function JournalEntry() {
 				{entry.date && entry.date !== "undefined" && (
 					<div className="col-3">
 						<label>Date</label> <br />
+						{/* I made them inputs to keep the same styling as the edit page */}
 						<input
 							className="form-control"
 							name="date"
@@ -40,10 +43,6 @@ export default function JournalEntry() {
 							value={entry.date !== "undefined" ? entry.date : " "}
 						/>
 					</div>
-					// <div className="col-3">
-					// 	<h6>Date:</h6>
-					// 	<p className="bg-white border rounded">{entry.date}</p>
-					// </div>
 				)}
 				{entry.title && entry.title !== "undefined" && (
 					<div className="col-6">

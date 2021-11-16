@@ -5,7 +5,9 @@ import "../App.css";
 //create safetyplan
 
 export default function SafetyPlanEntry() {
-	let { id } = useParams();
+	let { id } = useParams(); //grabs id of safetyplan from url
+
+	//to create new identifiers and resources:
 	const [newIdentifier, setNewIdentifier] = useState({
 		type: "", // "triggers" "space safety" "distractions" "helpful things"
 		text: "",
@@ -18,9 +20,16 @@ export default function SafetyPlanEntry() {
 		type: "", //boolean ~ professional or personal
 		sp_id: id,
 	});
+
+	//to display:
 	const [showPlanIdentifiers, setShowPlanIdentifiers] = useState([]);
 	const [showPlanResources, setShowPlanResources] = useState([]);
 	const [showSafetyPlan, setShowSafetyPlan] = useState([]);
+
+	//to update safetyplan with date:
+	const [date, setDate] = useState({ date: "" });
+
+	//fetch safety plan
 	useEffect(async () => {
 		try {
 			const response = await fetch(`/safetyplan/${id}`);
@@ -31,8 +40,7 @@ export default function SafetyPlanEntry() {
 		}
 	}, []);
 
-	const [date, setDate] = useState({ date: "" });
-
+	//fetch identifiers by safetyplan id
 	useEffect(async () => {
 		try {
 			const response = await fetch(`/safetyplan/${id}/identifiers`);
@@ -43,6 +51,7 @@ export default function SafetyPlanEntry() {
 		}
 	}, []);
 
+	//fetch resources by safetyplan id
 	useEffect(async () => {
 		try {
 			const response = await fetch(`/safetyplan/${id}/resources`);
@@ -53,18 +62,24 @@ export default function SafetyPlanEntry() {
 		}
 	}, []);
 
-	const handleResourceChange = (e) => {
-		const { value, name } = e.target;
-		setNewResource((state) => ({ ...state, [name]: value }));
-	};
-	const handleIdentifierChange = (e) => {
-		const { value, name } = e.target;
-		setNewIdentifier((state) => ({ ...state, [name]: value }));
-	};
+	//date form:
 	const handleDateChange = (e) => {
 		setDate({ date: e.target.value });
 	};
 
+	//identifier form:
+	const handleIdentifierChange = (e) => {
+		const { value, name } = e.target;
+		setNewIdentifier((state) => ({ ...state, [name]: value }));
+	};
+
+	//resource form:
+	const handleResourceChange = (e) => {
+		const { value, name } = e.target;
+		setNewResource((state) => ({ ...state, [name]: value }));
+	};
+
+	//post into identifiers table using sp_id from params
 	const handleIdentifierSubmit = async (e) => {
 		console.log(e);
 		e.preventDefault();
@@ -83,6 +98,8 @@ export default function SafetyPlanEntry() {
 		}
 		setNewIdentifier({ type: "", text: "" });
 	};
+
+	//post into resources table using sp_id from params
 	const handleResourceSubmit = async (e) => {
 		e.preventDefault();
 		try {
@@ -101,6 +118,7 @@ export default function SafetyPlanEntry() {
 		setNewResource({ name: "", info: "", type: "" });
 	};
 
+	//Add date to safetyplan
 	const updateDate = async (e) => {
 		e.preventDefault();
 		try {
@@ -118,6 +136,7 @@ export default function SafetyPlanEntry() {
 		}
 	};
 
+	//Delete identifier by id
 	const deleteIdentifier = async (ident_id) => {
 		try {
 			const res = await fetch(`/safetyplan/${id}/identifiers/${ident_id}`, {
@@ -130,6 +149,7 @@ export default function SafetyPlanEntry() {
 		}
 	};
 
+	//Delete resource by id
 	const deleteResource = async (resource_id) => {
 		try {
 			const res = await fetch(`/safetyplan/${id}/resources/${resource_id}`, {
@@ -142,6 +162,7 @@ export default function SafetyPlanEntry() {
 		}
 	};
 
+	//to show for dropdown when selecting safety plan identifier:
 	const heading = (newIdentifier) => {
 		switch (newIdentifier.type) {
 			case "Trigger":

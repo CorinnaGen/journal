@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import mainlogo from "./Photos/logo.png";
 
-import React, { useState } from "react";
+import React from "react";
 import Home from "./components/Home";
 import NewEntry from "./components/NewEntry";
 import JournalEntry from "./components/JournalEntry";
@@ -9,7 +9,6 @@ import Journal from "./components/Journal";
 import SafetyPlan from "./components/SafetyPlan";
 import SafetyPlanEntry from "./components/SafetyPlanEntry";
 import Joy from "./components/Joy";
-import AddJoy from "./components/AddJoy";
 import EditEntry from "./components/EditEntry";
 
 import "./App.css";

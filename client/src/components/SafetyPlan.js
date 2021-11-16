@@ -23,7 +23,6 @@ export default function SafetyPlan() {
 	}, []);
 
 	//get identifiers information
-
 	useEffect(async () => {
 		try {
 			const response = await fetch(`/safetyplan/identifiers`);
@@ -34,8 +33,7 @@ export default function SafetyPlan() {
 		}
 	}, []);
 
-	//get identifiers information
-
+	//get resources information
 	useEffect(async () => {
 		try {
 			const response = await fetch(`/safetyplan/resources`);
@@ -76,7 +74,7 @@ export default function SafetyPlan() {
 		navigate(`/safetyplan/${planID}/newplan`);
 	};
 
-	//this is to display:
+	//this is to display most recent safety plan:
 	const mostRecent =
 		showSafetyPlan.length > 0 && showSafetyPlan[showSafetyPlan.length - 1];
 
