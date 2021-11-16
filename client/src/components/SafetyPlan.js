@@ -87,7 +87,9 @@ export default function SafetyPlan() {
 			<div className="row">
 				<div className="col-sm-6 mb-4">
 					<div className="card">
-						<div className="card-header bg-test5 text-light">Distractions:</div>
+						<div className="card-header bg-test5 text-light">
+							Good ways to distract myself:
+						</div>
 						<div className="card-body bg-test6 ">
 							<p className="card-text">
 								{showPlanIdentifiers.map(
@@ -105,7 +107,31 @@ export default function SafetyPlan() {
 				</div>
 				<div className="col-sm-6 mb-4">
 					<div className="card">
-						<div className="card-header bg-test5 text-light">Triggers:</div>
+						<div className="card-header bg-test5 text-light">
+							Ways to keep my space safe:
+						</div>
+						<div className="card-body bg-test6">
+							<p className="card-text">
+								{showPlanIdentifiers.map(
+									(identifier) =>
+										identifier.sp_id === mostRecent.id &&
+										identifier.type === "Space safety" && (
+											<div>
+												<p>{identifier.text}</p>{" "}
+											</div>
+										)
+								)}
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div className="row">
+				<div className="col-sm-6 mb-4">
+					<div className="card">
+						<div className="card-header bg-test5 text-light">
+							How I know I don't feel well:
+						</div>
 						<div className="card-body bg-test6 ">
 							<p className="card-text">
 								{showPlanIdentifiers.map(
@@ -117,12 +143,10 @@ export default function SafetyPlan() {
 						</div>
 					</div>
 				</div>
-			</div>
-			<div className="row">
 				<div className="col-sm-6 mb-4">
 					<div className="card">
 						<div className="card-header bg-test5 text-light">
-							Things that help me when I feel this way:
+							Things that help when I feel this way:
 						</div>
 						<div className="card-body bg-test6">
 							<p className="card-text">
@@ -130,26 +154,6 @@ export default function SafetyPlan() {
 									(identifier) =>
 										identifier.sp_id === mostRecent.id &&
 										identifier.type === "Something Helpful" && (
-											<div>
-												<p>{identifier.text}</p>{" "}
-											</div>
-										)
-								)}
-							</p>
-						</div>
-					</div>
-				</div>
-				<div className="col-sm-6 mb-4">
-					<div className="card">
-						<div className="card-header bg-test5 text-light">
-							Ways to Keep My Space Safe:
-						</div>
-						<div className="card-body bg-test6">
-							<p className="card-text">
-								{showPlanIdentifiers.map(
-									(identifier) =>
-										identifier.sp_id === mostRecent.id &&
-										identifier.type === "Space safety" && (
 											<div>
 												<p>{identifier.text}</p>{" "}
 											</div>

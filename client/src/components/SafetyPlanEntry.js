@@ -165,13 +165,13 @@ export default function SafetyPlanEntry() {
 		<div>
 			<div className="bg-light shadow container mt-4">
 				<div className="row">
-					<div className="col-sm-8 mt-4">
+					<div className="col-sm-8 ">
 						<h3 className="darker">Current Safety Plan</h3>
 					</div>
-					<div className="col-sm-1 mt-4">
+					<div className="col-sm-1 ">
 						<h5 className="darker">Date: </h5>
 					</div>
-					<div className="col-sm-3 mt-4">
+					<div className="col-sm-3 ">
 						<h5 className="darker">
 							{showSafetyPlan.length > 0 &&
 							showSafetyPlan[0].date !== "undefined" ? (

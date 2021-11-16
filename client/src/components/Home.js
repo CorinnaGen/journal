@@ -12,17 +12,17 @@ export default function Home() {
 			<h3 className="darker">Welcome!</h3> <hr />
 			<div className="text-center">
 				<Link to={`/journal/`}>
-					<img className="img-fluid shadow" width="50%" src={journalpic} />
+					<img className="img-fluid shadow" width="40%" src={journalpic} />
 				</Link>
 				<br />
 				<br />
 				<Link to={`/journal/joys`}>
-					<img className="img-fluid shadow" width="50%" src={joypic} />
+					<img className="img-fluid shadow" width="40%" src={joypic} />
 				</Link>
 				<br />
 				<br />
 				<Link to={`/safetyplan`}>
-					<img className="img-fluid shadow" width="50%" src={sfplanpic} />
+					<img className="img-fluid shadow" width="40%" src={sfplanpic} />
 				</Link>
 			</div>
 			<br />
