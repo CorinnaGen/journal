@@ -9,14 +9,9 @@ export default function SafetyPlan() {
 	const [showPlanIdentifiers, setShowPlanIdentifiers] = useState([]);
 	const [showPlanResources, setShowPlanResources] = useState([]);
 
-	let navigate = useNavigate();
+	const navigate = useNavigate();
 
-	//if most recent does not have an updated date, do length - 2? loop backward until find date. Date needs to be made mandatory when adding new safety plan identifiers
-
-	let mostRecent =
-		showSafetyPlan.length > 0 && showSafetyPlan[showSafetyPlan.length - 1];
-
-	//get safetyplans to get id for resources and identifiers
+	//get safetyplan information
 	useEffect(async () => {
 		try {
 			const response = await fetch(`/safetyplan`);
@@ -26,6 +21,8 @@ export default function SafetyPlan() {
 			console.log(err);
 		}
 	}, []);
+
+	//get identifiers information
 
 	useEffect(async () => {
 		try {
@@ -37,6 +34,8 @@ export default function SafetyPlan() {
 		}
 	}, []);
 
+	//get identifiers information
+
 	useEffect(async () => {
 		try {
 			const response = await fetch(`/safetyplan/resources`);
@@ -47,7 +46,8 @@ export default function SafetyPlan() {
 		}
 	}, []);
 
-	//once a new plan is created (new plan length is > 1), redirect user to form for changing rows of "sp_resources" and "sp_identifiers". Use effect is listening for this change.
+	//once a new plan is created (new plan length is > 1), navigate user to form for to create rows of "sp_resources" and "sp_identifiers" tables. Use effect is listening for this change.
+
 	useEffect(() => {
 		if (newPlan.length >= 1) {
 			routeChange(newPlan[newPlan.length - 1].id);
@@ -65,16 +65,20 @@ export default function SafetyPlan() {
 				body: JSON.stringify(newPlan),
 			});
 			const data = await res.json();
-			setNewPlan(data);
+			setNewPlan(data); //this is what the useEffect is listening for
 		} catch (err) {
 			console.log(err);
 		}
 	};
 
-	//once a new "safety_plan" row has been created (aka newPlan.length >1), use effect calls this navigate:
+	//once a new "safety_plan" row has been created (aka newPlan.length >= 1), use effect calls this navigate:
 	const routeChange = async (planID) => {
 		navigate(`/safetyplan/${planID}/newplan`);
 	};
+
+	//this is to display:
+	const mostRecent =
+		showSafetyPlan.length > 0 && showSafetyPlan[showSafetyPlan.length - 1];
 
 	return (
 		<div className="container bg-light mt-4">
@@ -208,6 +212,7 @@ export default function SafetyPlan() {
 					</div>
 				</div>
 			</div>
+			{/* if there is no previous plan, show create new plan button, otherwise, show update and replace buttons. */}
 			{showSafetyPlan.length > 0 ? (
 				<div>
 					<Link to={`/safetyplan/${mostRecent.id}/newplan`}>
