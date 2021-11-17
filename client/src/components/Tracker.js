@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 function Tracker() {
     const [sumMood, setSumMood] = useState([]);
@@ -10,7 +10,9 @@ function Tracker() {
 
 
     return (
-        <div className="container m-4">
+        <div className="container bg-light shadow mt-4">
+            <h3 className="darker"> Tracker</h3>
+            <p>In this section you can see a summary of your whole month</p>
 
             
         </div>

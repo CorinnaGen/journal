@@ -9,9 +9,9 @@ function Login() {
     return (
        
         <div className="container bg-light shadow mt-4">
-                <h2>Welcome back!</h2>
+                <h2 className='darker'>Welcome back!</h2>
                 <br />
-            <h3>Login</h3>
+            <h3 className='darker'>Login</h3>
             <form >
                 <div className="col-6">
             <label>E-mail</label>

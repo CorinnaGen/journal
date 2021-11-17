@@ -40,7 +40,7 @@ const {name, email, password, repeat_password} = user;
     return (
         <div>
             <div className="container bg-light shadow mt-4">
-            <h1>Registration</h1>
+            <h3 className='darker'>Registration</h3>
              
             <form id="registrationform" onSubmit={handleSubmit}>
             

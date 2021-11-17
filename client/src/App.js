@@ -12,9 +12,11 @@ import Joy from "./components/Joy";
 import EditEntry from "./components/EditEntry";
 import Registration from "./components/Registration";
 import Login from "./components/Login";
+import Tracker from "./components/Tracker";
 
 
 import "./App.css";
+
 
 function App() {
 	return (
@@ -52,6 +54,9 @@ function App() {
 								<a className="nav-link mx-4" href={`/safetyplan`}>
 									Safety Plan
 								</a>
+								<a className="nav-link mx-4" href={`/tracker`}>
+									Tracker
+								</a>
 								
 										<a className="nav-link mx-4" href={`/login`}>
 									Login
@@ -80,6 +85,8 @@ function App() {
 					<Route path="/journal/:id/edit" element={<EditEntry />} />
 
 					<Route path="/journal/NewEntry" element={<NewEntry />} />
+
+					<Route path="/tracker" element={<Tracker />} />
 				</Routes>
 			</BrowserRouter>
 		</div>
