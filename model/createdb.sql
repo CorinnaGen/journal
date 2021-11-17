@@ -5,7 +5,7 @@ DROP TABLE if exists safety_plan;
 
 CREATE TABLE `journal_entries` (
 	`id` INT NOT NULL AUTO_INCREMENT,
-	`date` TEXT NOT NULL,
+	`date` DATE NOT NULL,
 	`entry_text` TEXT,
 	`moment_of_joy` varchar(255),
 	`mood` TEXT NOT NULL,
