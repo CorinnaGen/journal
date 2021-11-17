@@ -2,6 +2,7 @@ DROP TABLE if exists journal_entries;
 DROP TABLE if exists sp_resources; 
 DROP TABLE if exists sp_identifiers; 
 DROP TABLE if exists safety_plan; 
+DROP TABLE if exists users; 
 
 CREATE TABLE `journal_entries` (
 	`id` INT NOT NULL AUTO_INCREMENT,
@@ -34,6 +35,13 @@ CREATE TABLE `safety_plan` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`date` TEXT NOT NULL,
 	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `users` (
+	`user_id` INT NOT NULL AUTO_INCREMENT,
+	`journal_id` INT NOT NULL,
+	`safetyplan_id` INT NOT NULL,
+	PRIMARY KEY (`user_id`,`journal_id`,`safetyplan_id`)
 );
 
 
