@@ -10,8 +10,13 @@ install dependencies related to React (the client).
 
 ## Database Setup
 
-Edit `.env` file in project directory with your mySQL password. Then run
+Edit `.env` file in project directory with:
+ `DB_NAME=journal`
+ `DB_PASS=YOUR_PASSWORD` 
+ change this last one for your mySQL password. Then run
 `npm run migrate` to set up database tables.
+
+Run `USE journal` `SHOW TABLES` `DESCRIBE TABLE_NAME` to take a look at each table.
 
 ## Servers
 
