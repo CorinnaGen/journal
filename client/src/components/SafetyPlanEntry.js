@@ -18,6 +18,7 @@ export default function SafetyPlanEntry() {
 		name: "",
 		info: "",
 		type: "", //boolean ~ professional or personal
+		//ADD emergency contact property
 		sp_id: id,
 	});
 

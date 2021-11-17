@@ -69,14 +69,11 @@ function NewEntry() {
 							<label  className="m-4" htmlFor="select_menu">Today I feel</label>
 							<select
 						className="btn bg-test5 text-light dropdown-toggle"
-						name="type"
+						name="mood"
 						onChange={handleInputChange}
 						value={mood}
 						required
 					>
-						<option disabled selected value="">
-							Choose one
-						</option>
 						<option value="Happy">Happy</option>
 						<option value="Hopeful">Hopeful</option>
 						<option value="Optmistic">Optmistic</option>

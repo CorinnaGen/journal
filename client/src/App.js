@@ -10,6 +10,9 @@ import SafetyPlan from "./components/SafetyPlan";
 import SafetyPlanEntry from "./components/SafetyPlanEntry";
 import Joy from "./components/Joy";
 import EditEntry from "./components/EditEntry";
+import Registration from "./components/Registration";
+import Login from "./components/Login";
+
 
 import "./App.css";
 
@@ -35,19 +38,28 @@ function App() {
 						</button>
 						<div className="collapse navbar-collapse" id="navbarNavAltMarkup">
 							<div className="navbar-nav">
-								<a className="nav-link" href={`/`}>
+								<a className="nav-link mx-4" href={`/`}>
 									Home
 								</a>
-								<a className="nav-link" href={`/journal`}>
+							
+								<a className="nav-link mx-4" href={`/journal`}>
 									Journal
 								</a>
 
-								<a className="nav-link" href={`/journal/joys`}>
+								<a className="nav-link mx-4" href={`/journal/joys`}>
 									Moments of Joy
 								</a>
-								<a className="nav-link" href={`/safetyplan`}>
+								<a className="nav-link mx-4" href={`/safetyplan`}>
 									Safety Plan
 								</a>
+								
+										<a className="nav-link mx-4" href={`/login`}>
+									Login
+								</a>
+								<a className="nav-link mx-4" href={`/register`}>
+									Register
+								</a>
+								
 							</div>
 						</div>
 					</div>
@@ -55,8 +67,11 @@ function App() {
 
 				<Routes>
 					<Route path="/" element={<Home />} />
+					<Route path="/register" element={<Registration />} />
+					<Route path="/login" element={<Login />} />
+					
 					<Route path="/journal/joys/*" element={<Joy />} />
-
+                    
 					<Route path="/safetyplan" element={<SafetyPlan />} />
 					<Route path="/safetyplan/:id/newplan" element={<SafetyPlanEntry />} />
 

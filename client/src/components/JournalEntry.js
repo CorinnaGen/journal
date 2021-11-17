@@ -8,7 +8,7 @@ export default function JournalEntry() {
 
 	let navigate = useNavigate();
 
-	//if entry doesn't exist, sends user to "/jourlal"
+	//if entry doesn't exist, sends user to "/journal"
 	useEffect(() => {
 		if (entry.length === 0 || entry.message === "Entry not found") {
 			navigate("/journal");
