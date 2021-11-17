@@ -39,9 +39,9 @@ export default function JournalEntry() {
 						<input
 							className="form-control"
 							name="date"
-							type="date"
-                            min="2021-01-01" max="2050-12-31"  
-							value={entry.date !== "undefined" ? entry.date : " "}
+							type="date" 
+							value={entry.date !== "undefined" ? entry.date : " "
+						}
 						/>
 					</div>
 				)}

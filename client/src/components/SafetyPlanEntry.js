@@ -203,7 +203,7 @@ export default function SafetyPlanEntry() {
 										<input
 											className="form-control"
 											name="date"
-											type="text"
+											type="date"
 											value={date.date}
 											onChange={handleDateChange}
 											required

@@ -43,36 +43,62 @@ function NewEntry() {
 					<h3 className="darker">New Journal Entry</h3> <hr />
 					<div className="row">
 						<div className="col-3">
-							<label>Date</label> <br />
+							<label htmlFor="date">Date</label> <br />
 							<input
 								className="form-control"
 								name="date"
-								type="text"
+								type="date"
 								value={date}
 								onChange={handleInputChange}
 								required
 							/>
 						</div>
 						<div className="col-6">
-							<label>Title</label> <br />
+							<label htmlFor="title">Title</label> <br />
 							<input
 								className="form-control"
 								name="title"
 								type="text"
 								value={title}
 								onChange={handleInputChange}
+								minLength="5"
 								required
 							/>{" "}
 						</div>
-						<div className="col-3">
-							<label>Mood</label> <br />
-							<input
-								className="form-control"
-								name="mood"
-								type="text"
-								value={mood}
-								onChange={handleInputChange}
-							/>
+						<div className="col-6">
+							<label  className="m-4" htmlFor="select_menu">Today I feel</label>
+							<select
+						className="btn bg-test5 text-light dropdown-toggle"
+						name="type"
+						onChange={handleInputChange}
+						value={mood}
+						required
+					>
+						<option disabled selected value="">
+							Choose one
+						</option>
+						<option value="Happy">Happy</option>
+						<option value="Hopeful">Hopeful</option>
+						<option value="Optmistic">Optmistic</option>
+						<option value="Tired">
+							Tired
+						</option>
+						<option value="Anxious">
+							Anxious
+						</option>
+						<option value="Disconnected">
+							Disconnected
+						</option>
+						<option value="Angry">
+							Angry
+						</option>
+						<option value="Sad">
+					       Sad
+						</option>
+						<option value="Depressed">
+							Depressed
+						</option>
+					</select>
 						</div>
 					</div>
 					<div className="row">

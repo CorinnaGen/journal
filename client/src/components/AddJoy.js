@@ -45,7 +45,7 @@ export default function AddJoy({ onDone }) {
 						<input
 							className="form-control"
 							name="date"
-							type="text"
+							type="date"
 							value={date}
 							onChange={handleInputChange}
 							required
