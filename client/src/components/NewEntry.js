@@ -73,7 +73,9 @@ function NewEntry() {
 						onChange={handleInputChange}
 						value={mood}
 						required
-					>
+					>   <option disabled selected value="">
+							Choose one
+						</option>
 						<option value="Happy">Happy</option>
 						<option value="Hopeful">Hopeful</option>
 						<option value="Optmistic">Optmistic</option>

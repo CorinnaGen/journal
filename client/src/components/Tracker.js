@@ -1,68 +1,74 @@
 import React, {useState, useEffect} from 'react'
+import "./Tracker.css"
 
 function Tracker() {
-    const [sumMood, setSumMood] = useState([]);
-    const [entries, setEntries] = useState([])
+   
+    const [entries, setEntries] = useState([]) //this is an array of obj
     const [error, setError] = useState([])
+    //const [sumMood, setSumMood] = useState([])
 
-//fetch the entries
-// useEffect(getEntries, []);
+	useEffect(async () => {
+		try {
+			const response = await fetch("/journal_entries");
+			const data = await response.json();
+			setEntries(data);
+            
+            //should I put here generateMoodValue
+		} catch (err) {
+			setError(err);
+		}
+	}, []);
 
-// const getEntries = async () =>{
-//     try {
-// 			const response = await fetch(`/journal_entries`);
-// 			const data = await response.json();
-// 			setEntries(data);
-// 		} catch (err) {
-// 			setError(err);
-// 		}
-// }
+//to generate a mood value
 
-    //to generate a mood value
-const generateMoodValue = () => {
-const sumMood = 0;
-setEntries.map(entry => {
+const sumMood = entries.map(entry => {
     switch(entry.mood){
         case 'Happy' :
-        sumMood += 120; 
-            break;
+        return 'green'
         case 'Hopeful' :
-        sumMood += 100; 
-            break;
+        return 'light-green'
         case 'Optimistic' :
-        sumMood += 110; 
-            break;
+        return 'light-blue'
         case 'Tired' :
-        sumMood += 60; 
-            break;
+        return 'grey'
         case 'Anxious' :
-        sumMood += 60; 
-            break;
+        return 'yellow'
         case 'Disconnected' :
-        sumMood += 30; 
-            break;
+        return 'orange'
+         case 'Angry' :
+        return 'red'
             case 'Sad' :
-        sumMood -= 120; 
-            break;
+        return 'purple'
         case 'Depressed' :
-        sumMood -= 120; 
-            break;
+        return 'black'
+            
     }
-    
-})
-}
-
-//display mood of each day
-//having a function assign a weight to each mood
-//automatic message to emergency contact
-
-
+ 
+});
+console.log(entries)
+console.log(sumMood)
+  
 
     return (
         <div className="container bg-light shadow mt-4">
             <h3 className="darker"> Tracker</h3>
             <p>In this section you can see a summary of your whole month</p>
-
+            {sumMood.map(mood => (
+                <div className="row m-4">
+                    <div className="col-6">
+                            {(mood === 'green') ? (<div className="green">Happy</div>)
+                            : (mood ==='light-green') ?
+                            (<div className="light-green">Hopeful</div>)
+                            : (mood === 'light-blue') ? (<div className="light-blue">Optimistic</div>)
+                            : (mood === 'grey') ? (<div className="grey">Tired</div>)
+                            : (mood === 'yellow') ? (<div className="yellow">Anxious</div>)
+                            : (mood === 'orange') ? (<div className="orange">Disconnected</div>)
+                            : (mood ==='red') ? (<div className="red">Angry</div>)
+                            : (mood === 'purple') ? (<div className="purple">Sad</div>)
+                            : (<div className="black">Depressed</div>)}  
+                    </div>
+                </div>
+            ))}
             
         </div>
     )
