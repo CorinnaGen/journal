@@ -5,7 +5,7 @@ function Tracker() {
    
     const [entries, setEntries] = useState([]) //this is an array of obj
     const [error, setError] = useState([])
-    //const [sumMood, setSumMood] = useState([])
+    
 
 	useEffect(async () => {
 		try {
@@ -52,23 +52,25 @@ console.log(sumMood)
     return (
         <div className="container bg-light shadow mt-4">
             <h3 className="darker"> Tracker</h3>
-            <p>In this section you can see a summary of your whole month</p>
-            {sumMood.map(mood => (
-                <div className="row m-4">
-                    <div className="col-6">
-                            {(mood === 'green') ? (<div className="green">Happy</div>)
+            <p>Your mood in the past days based on your entries</p>
+            <div className="row m-4">
+            {sumMood.map((mood, i) => (
+                            <div className="col-3" key={i}>
+                            {(mood === 'green') ? (<div className="mood green"></div>)
                             : (mood ==='light-green') ?
-                            (<div className="light-green">Hopeful</div>)
-                            : (mood === 'light-blue') ? (<div className="light-blue">Optimistic</div>)
-                            : (mood === 'grey') ? (<div className="grey">Tired</div>)
-                            : (mood === 'yellow') ? (<div className="yellow">Anxious</div>)
-                            : (mood === 'orange') ? (<div className="orange">Disconnected</div>)
-                            : (mood ==='red') ? (<div className="red">Angry</div>)
-                            : (mood === 'purple') ? (<div className="purple">Sad</div>)
-                            : (<div className="black">Depressed</div>)}  
-                    </div>
-                </div>
-            ))}
+                            (<div className=" mood light-green"></div>)
+                            : (mood === 'light-blue') ? (<div className="mood light-blue"></div>)
+                            : (mood === 'grey') ? (<div className="mood grey"></div>)
+                            : (mood === 'yellow') ? (<div className=" mood yellow"></div>)
+                            : (mood === 'orange') ? (<div className="mood orange"></div>)
+                            : (mood ==='red') ? (<div className="mood red"></div>)
+                            : (mood === 'purple') ? (<div className="mood purple"></div>)
+                            : (<div className="mood black"></div>)}  
+                            </div>
+                    
+              
+            ))}  
+            </div>
             
         </div>
     )
