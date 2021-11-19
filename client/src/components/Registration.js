@@ -2,7 +2,7 @@ import React, { useState} from 'react'
 
 
 function Registration() {
-const [user, setUser] = useState({ name: "", email: "", password: "", repeat_password: ""});
+const [user, setUser] = useState({ username: "", email: "", password: ""});
 
 
 const [error, setError] = useState("");
@@ -35,7 +35,7 @@ register();
     }
   
 }
-const {name, email, password, repeat_password} = user;
+const {username, email, password } = user;
  
     return (
         <div>
@@ -49,8 +49,8 @@ const {name, email, password, repeat_password} = user;
                 <input 
                 className="form-control"
                 type="text"
-                name="name"
-                value={name}
+                name="username"
+                value={username}
                 required
                 onChange={(e)=>handleInputChange(e)}
                 />
@@ -77,18 +77,7 @@ const {name, email, password, repeat_password} = user;
                  onChange={(e)=>handleInputChange(e)}
                 />
                 </div>
-                <div className="col-6 mt-4">
-                <label className="form-label mt-4">Repeat Password</label>
-                <input 
-                className="form-control"
-                type="password"
-                name="repeat_password"
-                value={repeat_password}
-                required
-                minLength="8"
-                 onChange={(e)=>handleInputChange(e)}
-                />
-                </div>
+               
                 <div className="col-6 mt-4">
                 <div class="form-check">
   <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" onChange={(e)=>handleInputChange(e)} />

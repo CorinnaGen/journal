@@ -39,9 +39,10 @@ CREATE TABLE `safety_plan` (
 
 CREATE TABLE `users` (
 	`user_id` INT NOT NULL AUTO_INCREMENT,
-	`journal_id` INT NOT NULL,
-	`safetyplan_id` INT NOT NULL,
-	PRIMARY KEY (`user_id`,`journal_id`,`safetyplan_id`)
+	`username` VARCHAR(40),
+	`email` VARCHAR(20),
+	`password` VARCHAR(255),
+	PRIMARY KEY (`user_id`)
 );
 
 
