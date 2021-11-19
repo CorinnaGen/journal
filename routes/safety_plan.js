@@ -2,8 +2,10 @@ var express = require("express");
 var router = express.Router();
 const db = require("../model/helper");
 const spMustExist = require("../guards/spMustExist");
+const userMustLoggedIn = require("../guards/userMustLoggedIn");
 
-router.get("/", async (req, res) => {
+router.get("/", userMustLoggedIn, async (req, res) => {
+	
 	try {
 		const results = await db("SELECT * FROM safety_plan;");
 		res.send(results.data);

@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 const db = require("../model/helper");
 const entryMustExist = require("../guards/entryMustExist");
+const userMustLoggedIn = require("../guards/userMustLoggedIn");
 
 /* GET journal entries listing. */
 router.get("/", async function (req, res, next) {
