@@ -5,7 +5,7 @@ const entryMustExist = require("../guards/entryMustExist");
 const userMustLoggedIn = require("../guards/userMustLoggedIn");
 
 /* GET journal entries listing. */
-router.get("/", async function (req, res, next) {
+router.get("/", userMustLoggedIn, async function (req, res, next) {
 	try {
 		const results = await db("SELECT * FROM journal_entries;");
 		res.send(results.data);

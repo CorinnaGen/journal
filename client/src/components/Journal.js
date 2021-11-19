@@ -42,7 +42,7 @@ export default function Journal() {
 					</tr>
 				</thead>
 				<tbody>
-					{entries &&
+					{entries.length > 0 &&
 						entries.map((entry) => (
 							<tr key={entry.id}>
 								<td className="darker">#{entry.id}</td>

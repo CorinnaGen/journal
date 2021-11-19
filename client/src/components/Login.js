@@ -47,9 +47,9 @@ function Login() {
         },
       });
 
-      console.log(data.message);
+      console.log('this is the data', data.message);
     } catch (error) {
-      console.log(error);
+      console.log('is this the error?', error);
     }
   };
 
