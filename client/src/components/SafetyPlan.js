@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 
 //display safetyplan
 
@@ -14,8 +15,13 @@ export default function SafetyPlan() {
 	//get safetyplan information
 	useEffect(async () => {
 		try {
-			const response = await fetch(`/safetyplan`);
-			const data = await response.json();
+			// const response = await fetch(`/safetyplan`);
+			// const data = await response.json();
+	    const { data } = await axios("/safetyplan", {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
 			setShowSafetyPlan(data);
 		} catch (err) {
 			console.log(err);
@@ -25,8 +31,14 @@ export default function SafetyPlan() {
 	//get identifiers information
 	useEffect(async () => {
 		try {
-			const response = await fetch(`/safetyplan/identifiers`);
-			const data = await response.json();
+			// const response = await fetch(`/safetyplan/identifiers`);
+			// const data = await response.json();
+			  const { data } = await axios("/safetyplan/identifiers", {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+			
 			setShowPlanIdentifiers(data);
 		} catch (err) {
 			console.log(err);
@@ -36,8 +48,13 @@ export default function SafetyPlan() {
 	//get resources information
 	useEffect(async () => {
 		try {
-			const response = await fetch(`/safetyplan/resources`);
-			const data = await response.json();
+			// const response = await fetch(`/safetyplan/resources`);
+			// const data = await response.json();
+			  const { data } = await axios("/safetyplan/resources", {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
 			setShowPlanResources(data);
 		} catch (err) {
 			console.log(err);
@@ -59,6 +76,7 @@ export default function SafetyPlan() {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
+					authorization: `Bearer ${localStorage.getItem("token")}`
 				},
 				body: JSON.stringify(newPlan),
 			});

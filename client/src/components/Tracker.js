@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import axios from 'axios'
 import "./Tracker.css"
 
 function Tracker() {
@@ -10,15 +11,21 @@ function Tracker() {
 
 useEffect(async () => {
 		try {
-			const response = await fetch("/journal_entries");
-			const data = await response.json();
-			setEntries(data);
+			// const response = await fetch("/journal_entries");
+			// const data = await response.json();
+			// 
+        const { data } = await axios("/journal_entries", {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      setEntries(data);
             
-            //should I put here generateMoodValue
 		} catch (err) {
 			setError(err);
 		}
 	}, []);
+
 
 //to generate a mood value
 
@@ -51,7 +58,7 @@ console.log(sumMood)
 
 //to display the prevalent mood among the entries
 
-let prevalentMood = sumMood.reduce((counter, current) => (counter[current] = counter[current] + 1 || 1, counter), {});
+let prevalentMood = sumMood.reduce((counter, current) => (counter[current] = counter[current] + 1 || 1, counter), {}); 
 //it returns an object like this {tired: 1, angry: 1, sad: 1, depressed: 1, happy: 1}
 let moodTrack = [];
 for(let key in prevalentMood){

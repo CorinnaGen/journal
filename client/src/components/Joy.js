@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import AddJoy from "./AddJoy";
 //AddJoy gets imported here, not in App.js so that onDone can be passed down to it
 
@@ -16,8 +17,14 @@ export default function Joy() {
 
 	const getMomentsOfJoy = async () => {
 		try {
-			const response = await fetch("/journal_entries/");
-			const data = await response.json();
+			// const response = await fetch("/journal_entries/");
+			// const data = await response.json();
+			  const { data } = await axios("/journal_entries", {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+			
 			setEntries(data);
 		} catch (err) {
 			console.log(err);
@@ -42,7 +49,7 @@ export default function Joy() {
 							</tr>
 						</thead>
 						<tbody>
-							{entries &&
+							{entries.length > 0 &&
 								entries.map(
 									(entry) =>
 										entry.moment_of_joy && (

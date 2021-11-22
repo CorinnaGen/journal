@@ -13,7 +13,7 @@ router.get("/", userMustLoggedIn, async (req, res) => {
 		res.status(500).send(err);
 	}
 });
-router.get("/:id", spMustExist, async (req, res) => {
+router.get("/:id", userMustLoggedIn, spMustExist, async (req, res) => {
 	try {
 		const { id } = req.params;
 		const results = await db(`SELECT * FROM safety_plan WHERE id = ${id};`);
@@ -23,7 +23,7 @@ router.get("/:id", spMustExist, async (req, res) => {
 	}
 });
 
-router.post("/", async function (req, res, next) {
+router.post("/", userMustLoggedIn, async function (req, res, next) {
 	try {
 		const { date } = req.body;
 		await db(`INSERT INTO safety_plan (date) VALUE ("${date}");`);
@@ -34,7 +34,7 @@ router.post("/", async function (req, res, next) {
 	}
 });
 
-router.put("/:id", spMustExist, async function (req, res, next) {
+router.put("/:id",userMustLoggedIn, spMustExist, async function (req, res, next) {
 	try {
 		const { id } = req.params;
 		const { date } = req.body;
@@ -50,7 +50,7 @@ router.put("/:id", spMustExist, async function (req, res, next) {
 	}
 });
 
-router.delete("/:id", spMustExist, async function (req, res, next) {
+router.delete("/:id",userMustLoggedIn, spMustExist, async function (req, res, next) {
 	try {
 		const { id } = req.params;
 		await db(`DELETE FROM safety_plan WHERE id = "${id}";`);

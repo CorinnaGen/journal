@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../App.css";
+import axios from 'axios'
 import quotes from "./quotes";
 
 export default function Journal() {
@@ -10,8 +11,14 @@ export default function Journal() {
 	//get entries
 	useEffect(async () => {
 		try {
-			const response = await fetch("/journal_entries");
-			const data = await response.json();
+			// const response = await fetch("/journal_entries");
+			// const data = await response.json();
+			const { data } = await axios("/journal_entries", {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+			
 			setEntries(data);
 		} catch (err) {
 			console.log(err);

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import axios from 'axios'
 import "../App.css";
 
 export default function JournalEntry() {
@@ -18,8 +19,14 @@ export default function JournalEntry() {
 	//fetch journal entry by id from params
 	useEffect(async () => {
 		try {
-			const response = await fetch(`/journal_entries/"${id}"`);
-			const data = await response.json();
+			// const response = await fetch(`/journal_entries/"${id}"`);
+			// const data = await response.json();
+			 const { data } = await axios(`/journal_entries/"${id}"`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+			
 			setEntry(data);
 		} catch (err) {
 			console.log(err);

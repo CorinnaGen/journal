@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import "../App.css";
-
+import axios from "axios";
 //create safetyplan
 
 export default function SafetyPlanEntry() {
@@ -33,8 +33,13 @@ export default function SafetyPlanEntry() {
 	//fetch safety plan
 	useEffect(async () => {
 		try {
-			const response = await fetch(`/safetyplan/${id}`);
-			const data = await response.json();
+			// const response = await fetch(`/safetyplan/${id}`);
+			// const data = await response.json();
+			  const { data } = await axios(`/safetyplan/${id}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
 			setShowSafetyPlan(data);
 		} catch (err) {
 			console.log(err);
@@ -44,8 +49,13 @@ export default function SafetyPlanEntry() {
 	//fetch identifiers by safetyplan id
 	useEffect(async () => {
 		try {
-			const response = await fetch(`/safetyplan/${id}/identifiers`);
-			const data = await response.json();
+			// const response = await fetch(`/safetyplan/${id}/identifiers`);
+			// const data = await response.json();
+			 const { data } = await axios(`/safetyplan/${id}/identifiers`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
 			setShowPlanIdentifiers(data);
 		} catch (err) {
 			console.log(err);
@@ -55,8 +65,13 @@ export default function SafetyPlanEntry() {
 	//fetch resources by safetyplan id
 	useEffect(async () => {
 		try {
-			const response = await fetch(`/safetyplan/${id}/resources`);
-			const data = await response.json();
+			// const response = await fetch(`/safetyplan/${id}/resources`);
+			// const data = await response.json();
+			 const { data } = await axios(`/safetyplan/${id}/resources`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
 			setShowPlanResources(data);
 		} catch (err) {
 			console.log(err);
@@ -89,6 +104,7 @@ export default function SafetyPlanEntry() {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
+					 authorization: `Bearer ${localStorage.getItem("token")}`,
 				},
 				body: JSON.stringify(newIdentifier),
 			});
@@ -108,6 +124,7 @@ export default function SafetyPlanEntry() {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
+					 authorization: `Bearer ${localStorage.getItem("token")}`,
 				},
 				body: JSON.stringify(newResource),
 			});
@@ -127,6 +144,7 @@ export default function SafetyPlanEntry() {
 				method: "Put",
 				headers: {
 					"Content-Type": "application/json",
+					 authorization: `Bearer ${localStorage.getItem("token")}`,
 				},
 				body: JSON.stringify(date),
 			});
@@ -142,6 +160,9 @@ export default function SafetyPlanEntry() {
 		try {
 			const res = await fetch(`/safetyplan/${id}/identifiers/${ident_id}`, {
 				method: "DELETE",
+				 headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
 			});
 			const data = await res.json();
 			setShowPlanIdentifiers(data);
@@ -155,6 +176,9 @@ export default function SafetyPlanEntry() {
 		try {
 			const res = await fetch(`/safetyplan/${id}/resources/${resource_id}`, {
 				method: "DELETE",
+				 headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
 			});
 			const data = await res.json();
 			setShowPlanResources(data);

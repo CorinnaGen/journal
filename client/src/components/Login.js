@@ -39,19 +39,19 @@ function Login() {
     console.log('am i in the logout?')
   };
 
-  const requestData = async () => {
-    try {
-      const { data } = await axios("/journal_entries", {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+  // const requestData = async () => {
+  //   try {
+  //     const { data } = await axios("/journal_entries", {
+  //       headers: {
+  //         authorization: `Bearer ${localStorage.getItem("token")}`,
+  //       },
+  //     });
 
-      console.log('this is the data', data.message);
-    } catch (error) {
-      console.log('is this the error?', error);
-    }
-  };
+  //     console.log('this is the data', data.message);
+  //   } catch (error) {
+  //     console.log('is this the error?', error);
+  //   }
+  // };
 
 
 
@@ -75,7 +75,7 @@ function Login() {
             </div>
             
              <button className="btn btn-test6 bg-test6 m-4" onClick={logout}>Log out</button>
-              <button className="btn btn-test6 bg-test6 m-4" onClick={requestData}>see entries</button>
+              {/* <button className="btn btn-test6 bg-test6 m-4" onClick={requestData}>see entries</button> */}
         </div>
     )
 }

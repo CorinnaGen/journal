@@ -12,6 +12,7 @@ import Joy from "./components/Joy";
 import EditEntry from "./components/EditEntry";
 import Registration from "./components/Registration";
 import Login from "./components/Login";
+import Logout from "./components/Logout";
 import Tracker from "./components/Tracker";
 
 
@@ -61,6 +62,9 @@ function App() {
 										<a className="nav-link mx-4" href={`/login`}>
 									Login
 								</a>
+									<a className="nav-link mx-4" href={`/login`}>
+									Logout
+								</a>
 								<a className="nav-link mx-4" href={`/register`}>
 									Register
 								</a>
@@ -74,6 +78,7 @@ function App() {
 					<Route path="/" element={<Home />} />
 					<Route path="/register" element={<Registration />} />
 					<Route path="/login" element={<Login />} />
+					<Route path="/logout" element={<Logout />} />
 					
 					<Route path="/journal/joys/*" element={<Joy />} />
                     

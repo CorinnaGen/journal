@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "../App.css";
+import axios from "axios";
 
 export default function EditEntry() {
 	const { id } = useParams();
@@ -8,8 +9,13 @@ export default function EditEntry() {
 
 	useEffect(async () => {
 		try {
-			const response = await fetch(`/journal_entries/${id}`);
-			const data = await response.json();
+			// const response = await fetch(`/journal_entries/${id}`);
+			// const data = await response.json();
+			const { data } = await axios(`/journal_entries/${id}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
 			setEntry(data);
 		} catch (err) {
 			console.log(err);
@@ -37,6 +43,7 @@ export default function EditEntry() {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
+					 authorization: `Bearer ${localStorage.getItem("token")}`,
 				},
 				body: JSON.stringify(entry),
 			});
@@ -53,6 +60,9 @@ export default function EditEntry() {
 		try {
 			const res = await fetch(`/journal_entries/${id}`, {
 				method: "DELETE",
+				     headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
 			});
 			const data = await res.json();
 			setEntry(data);

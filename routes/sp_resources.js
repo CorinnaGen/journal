@@ -2,8 +2,9 @@ var express = require("express");
 var router = express.Router();
 const db = require("../model/helper");
 const resourceMustExist = require("../guards/resourceMustExist");
+const userMustLoggedIn = require("../guards/userMustLoggedIn");
 
-router.get("/resources", async function (req, res, next) {
+router.get("/resources", userMustLoggedIn, async function (req, res, next) {
 	try {
 		const results = await db("SELECT * FROM sp_resources;");
 		res.send(results.data);
@@ -12,7 +13,7 @@ router.get("/resources", async function (req, res, next) {
 	}
 });
 
-router.get("/identifiers", async function (req, res, next) {
+router.get("/identifiers", userMustLoggedIn, async function (req, res, next) {
 	try {
 		const results = await db("SELECT * FROM sp_identifiers;");
 		res.send(results.data);
@@ -21,7 +22,7 @@ router.get("/identifiers", async function (req, res, next) {
 	}
 });
 
-router.get("/:sp_id/resources", async function (req, res, next) {
+router.get("/:sp_id/resources", userMustLoggedIn, async function (req, res, next) {
 	try {
 		const { sp_id } = req.params;
 		const results = await db(
@@ -35,6 +36,7 @@ router.get("/:sp_id/resources", async function (req, res, next) {
 
 router.get(
 	"/:sp_id/resources/:id",
+	userMustLoggedIn,
 	resourceMustExist,
 	async function (req, res, next) {
 		try {
@@ -51,7 +53,7 @@ router.get(
 	}
 );
 
-router.post("/:sp_id/resources", async function (req, res, next) {
+router.post("/:sp_id/resources", userMustLoggedIn, async function (req, res, next) {
 	try {
 		const { sp_id } = req.params;
 		const { name, info, type } = req.body;
@@ -69,6 +71,7 @@ router.post("/:sp_id/resources", async function (req, res, next) {
 
 router.put(
 	"/:sp_id/resources/:id",
+	userMustLoggedIn,
 	resourceMustExist,
 	async function (req, res, next) {
 		try {
@@ -95,6 +98,7 @@ router.put(
 
 router.delete(
 	"/:sp_id/resources/:id",
+	userMustLoggedIn,
 	resourceMustExist,
 	async function (req, res, next) {
 		try {

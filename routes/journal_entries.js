@@ -14,11 +14,11 @@ router.get("/", userMustLoggedIn, async function (req, res, next) {
 	}
 });
 
-router.get("/:id", entryMustExist, function (req, res, next) {
+router.get("/:id",userMustLoggedIn, entryMustExist, function (req, res, next) {
 	res.send(req.entry);
 });
 
-router.post("/", async function (req, res, next) {
+router.post("/", userMustLoggedIn, async function (req, res, next) {
 	try {
 		const { date, title, mood, entry_text, moment_of_joy } = req.body;
 		await db(
@@ -31,7 +31,7 @@ router.post("/", async function (req, res, next) {
 	}
 });
 
-router.delete("/:id", entryMustExist, async function (req, res, next) {
+router.delete("/:id", userMustLoggedIn, entryMustExist, async function (req, res, next) {
 	try {
 		await db(`DELETE FROM journal_entries WHERE id = "${req.entry.id}";`);
 		const results = await db(
@@ -43,7 +43,7 @@ router.delete("/:id", entryMustExist, async function (req, res, next) {
 	}
 });
 
-router.put("/:id", entryMustExist, async function (req, res, next) {
+router.put("/:id", userMustLoggedIn, entryMustExist, async function (req, res, next) {
 	try {
 		const { title, entry_text, moment_of_joy, mood, date } = req.body;
 		const { id } = req.params;
