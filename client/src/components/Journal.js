@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "../App.css";
 import axios from 'axios'
 import quotes from "./quotes";
+import NavBar from "./NavBar";
 
 export default function Journal() {
 	let [entries, setEntries] = useState([]);
@@ -13,13 +14,13 @@ export default function Journal() {
 		try {
 			// const response = await fetch("/journal_entries");
 			// const data = await response.json();
-			const { data } = await axios("/journal_entries", {
+		const { data } = await axios("/journal_entries", {
         headers: {
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
 			
-			setEntries(data);
+	setEntries(data);
 		} catch (err) {
 			console.log(err);
 		}
@@ -36,7 +37,9 @@ export default function Journal() {
 	const selectedQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
 	return (
+		<div><NavBar />
 		<div className="container bg-light shadow mt-4 mb-4">
+			 
 			<h3 className="darker"> My Journal </h3> <hr />
 			<table className="table table-bordered table-striped shadow">
 				<thead className="table text-light bg-test5">
@@ -93,6 +96,7 @@ export default function Journal() {
 					: `"${selectedQuote.quote}" -${selectedQuote.author}`}{" "}
 			</h5>
 			<br />
+		</div>
 		</div>
 	);
 }

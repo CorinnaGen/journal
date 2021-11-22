@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import "./Tracker.css"
+import NavBar from './NavBar'
 
 function Tracker() {
    
@@ -16,7 +17,7 @@ useEffect(async () => {
 			// 
         const { data } = await axios("/journal_entries", {
         headers: {
-          authorization: `Bearer ${localStorage.getItem("token")}`,
+        authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
       setEntries(data);
@@ -70,6 +71,7 @@ console.log(moodTrack)
   
 
     return (
+        <div> <NavBar/>
         <div className="container bg-light shadow mt-4">
             <h3 className="darker"> Tracker</h3>
             <p>Your mood in the past days based on your entries</p>
@@ -97,6 +99,7 @@ console.log(moodTrack)
             ))} 
             </div>
             
+        </div>
         </div>
     )
 }

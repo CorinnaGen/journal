@@ -37,7 +37,7 @@ router.post("/login", async(req,res)=>{
     const user = results.data[0];
 
     if (user) {
-      const user_id = user.id;
+      const user_id = user.user_id;
 
       const correctPsw = await bcrypt.compare(password, user.password);
 

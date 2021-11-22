@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { useNavigate } from "react-router-dom";
 import useAuth from '../hooks/useAuth';
+import NavBar from './NavBar';
 
 
 function Login() {
@@ -63,9 +64,9 @@ const login = async () =>{
 
 
     return (
-       
+       <div>   <NavBar />
         <div className="container bg-light shadow mt-4">
-                
+              
                 <br />
             <h3 className='darker'>Login</h3>
             
@@ -85,6 +86,7 @@ const login = async () =>{
             
              {/* <button className="btn btn-test6 bg-test6 m-4" onClick={logout}>Log out</button> */}
               {/* <button className="btn btn-test6 bg-test6 m-4" onClick={requestData}>see entries</button> */}
+        </div>
         </div>
     )
 }

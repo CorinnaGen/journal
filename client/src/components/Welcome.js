@@ -1,6 +1,7 @@
 import React from 'react'
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import NavBar from './NavBar';
 // import mainlogo from "./Photos/logo.png";
 
 function Welcome() {
@@ -13,7 +14,7 @@ function Welcome() {
 
     return (
         <div className="container bg-light shadow mt-4">
-         
+        
             <h3 className="darker">Welcome!</h3>
             <div className="col-6">
                 <h4>About MyJournal</h4>

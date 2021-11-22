@@ -11,6 +11,7 @@ CREATE TABLE `journal_entries` (
 	`moment_of_joy` varchar(255),
 	`mood` TEXT NOT NULL,
 	`title` varchar(255) NOT NULL,
+	`user_id` INT NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
@@ -34,13 +35,14 @@ CREATE TABLE `sp_identifiers` (
 CREATE TABLE `safety_plan` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`date` TEXT NOT NULL,
+	`user_id` INT NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `users` (
 	`user_id` INT NOT NULL AUTO_INCREMENT,
 	`username` VARCHAR(40),
-	`email` VARCHAR(20),
+	`email` VARCHAR(40),
 	`password` VARCHAR(255),
 	PRIMARY KEY (`user_id`)
 );

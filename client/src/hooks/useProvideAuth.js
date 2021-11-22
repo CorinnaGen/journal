@@ -14,6 +14,7 @@ function useProvideAuth() {
 
       localStorage.setItem("token", data.token);
       setIsLoggedIn(true);
+      console.log(data.token)
       // an open door so we can do anything after logging in
       cb(data);
     } catch (err) {

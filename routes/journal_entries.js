@@ -7,7 +7,7 @@ const userMustLoggedIn = require("../guards/userMustLoggedIn");
 /* GET journal entries listing. */
 router.get("/", userMustLoggedIn, async function (req, res, next) {
 	try {
-		const results = await db("SELECT * FROM journal_entries;");
+		const results = await db(`SELECT * FROM journal_entries WHERE user_id=${req.user_id};`);
 		res.send(results.data);
 	} catch (err) {
 		res.status(500).send(err);
@@ -22,9 +22,11 @@ router.post("/", userMustLoggedIn, async function (req, res, next) {
 	try {
 		const { date, title, mood, entry_text, moment_of_joy } = req.body;
 		await db(
-			`INSERT INTO journal_entries (date, title, mood, entry_text, moment_of_joy) VALUES ("${date}","${title}","${mood}","${entry_text}","${moment_of_joy}");`
+			`INSERT INTO journal_entries (date, title, mood, entry_text, moment_of_joy, user_id) 
+			VALUES ("${date}","${title}","${mood}","${entry_text}","${moment_of_joy}",${req.user_id});`
 		);
-		const results = await db("SELECT * FROM journal_entries;");
+		console.log(req.user_id);
+		const results = await db(`SELECT * FROM journal_entries WHERE user_id=${req.user_id};`);
 		res.send(results.data);
 	} catch (err) {
 		res.status(500).send(err);

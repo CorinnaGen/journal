@@ -1,15 +1,17 @@
 import React from 'react'
 import useAuth from "../hooks/useAuth";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import AuthProvider from "./AuthProvider";
 
 function NavBar() {
     const auth = useAuth();
-    // const navigate = useNavigate();
-    // const logout = () => {
-    // auth.signout(() => navigate("/login"));
-//   };
+    const navigate = useNavigate();
+    const logout = () => {
+    auth.signout(() => navigate("/login"));
+  };
     return (
         <div>
+            <AuthProvider>
             <nav className="navbar sticky-top shadow navbar-expand-lg navbar-dark bg-test5">
 					<div className="container">
 						<a className="navbar-brand" href={`/`}>
@@ -56,13 +58,11 @@ function NavBar() {
 									Login
 								</a>) }	
 
-                                {/* {auth.isLoggedIn && (	
-                   
-					<button  onClick={logout} className="btn bg-test6 btn-test6 m-4">
+                                {auth.isLoggedIn && (	
+					<a  className="nav-link mx-4" onClick={logout}>
 						Logout
-					</button>
-				)} */}
-								
+					</a>
+				)}
 								{!auth.isLoggedIn &&(<a className="nav-link mx-4" href={`/register`}>
 									Register
 								</a>)}
@@ -71,6 +71,7 @@ function NavBar() {
 						</div>
 					</div>
 				</nav>
+                </AuthProvider>
         </div>
     )
 }

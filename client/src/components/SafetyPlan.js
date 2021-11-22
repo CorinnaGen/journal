@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+import NavBar from "./NavBar";
 
 //display safetyplan
 
@@ -22,7 +23,7 @@ export default function SafetyPlan() {
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-			setShowSafetyPlan(data);
+		setShowSafetyPlan(data);
 		} catch (err) {
 			console.log(err);
 		}
@@ -97,6 +98,7 @@ export default function SafetyPlan() {
 		showSafetyPlan.length > 0 && showSafetyPlan[showSafetyPlan.length - 1];
 
 	return (
+		<div><NavBar/>
 		<div className="container bg-light mt-4">
 			<h3 className="darker">Safety Plan </h3> <hr />
 			<div>
@@ -253,6 +255,7 @@ export default function SafetyPlan() {
 			)}
 			<br />
 			<br />
+		</div>
 		</div>
 	);
 }

@@ -30,7 +30,7 @@ function App() {
 		<div className="app">
 
 			<AuthProvider>
-				   <NavBar />
+				   
 			<BrowserRouter>
 				
 				<Routes>

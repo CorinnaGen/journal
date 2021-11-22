@@ -1,4 +1,6 @@
 import React, { useState} from 'react'
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 
 
@@ -7,6 +9,13 @@ const [user, setUser] = useState({ username: "", email: "", password: ""});
 
 
 const [error, setError] = useState("");
+
+const auth = useAuth();
+const navigate = useNavigate();
+ 
+
+
+
 const handleInputChange = (event) => {
 event.preventDefault();
  const {value, name} = event.target;
@@ -19,7 +28,7 @@ register();
 
  const register = async () => {
      try {
-        const response = await fetch("/users", {
+        const response = await fetch("users/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -27,19 +36,21 @@ register();
         body: JSON.stringify(user)
       });
       const newUser = await response.json();
+      console.log(newUser)
     //   props.onDoneCb(newUser);
     setUser(newUser)
-      
-   //Where is this data going 
+   
+  
     } catch (error) {
       setError(error.message);
     }
-  
+   navigate("/login")
 }
 const {username, email, password } = user;
  
     return (
         <div>
+          
             <div className="container bg-light shadow mt-4">
             <h3 className='darker'>Registration</h3>
             

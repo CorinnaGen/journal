@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import AddJoy from "./AddJoy";
+import NavBar from "./NavBar";
 //AddJoy gets imported here, not in App.js so that onDone can be passed down to it
 
 import "../App.css";
@@ -19,9 +20,9 @@ export default function Joy() {
 		try {
 			// const response = await fetch("/journal_entries/");
 			// const data = await response.json();
-			  const { data } = await axios("/journal_entries", {
+		const { data } = await axios("/journal_entries", {
         headers: {
-          authorization: `Bearer ${localStorage.getItem("token")}`,
+        authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
 			
@@ -36,6 +37,7 @@ export default function Joy() {
 
 	return (
 		<div>
+			 <NavBar />
 			<div className="container bg-light shadow mt-4">
 				<h3 className="darker">My Moments of Joy: </h3>
 				<hr />

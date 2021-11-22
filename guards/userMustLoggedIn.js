@@ -22,10 +22,13 @@ jwt.verify(token, supersecret, (err, decoded) =>{
     if (err) {
         console.log(err)
         return res.status(401).send({message: 'Invalid token'});
-    }
-    req.user = decoded;//payload
-    console.log(req.user)
+    } else{
+
+    req.user_id = decoded.user_id;//payload
+    console.log("am i here", decoded)
     next();
+    }
+    
 });
 }
 
