@@ -21,6 +21,7 @@ CREATE TABLE `sp_resources` (
 	`info` TEXT NOT NULL,
 	`type` BOOLEAN NOT NULL,
 	`sp_id` INT NOT NULL,
+	`user_id` INT NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
@@ -29,6 +30,7 @@ CREATE TABLE `sp_identifiers` (
 	`type` TEXT NOT NULL,
 	`text` TEXT NOT NULL,
 	`sp_id` INT NOT NULL,
+	`user_id` INT NOT NULL,
 	PRIMARY KEY (`id`)
 );
 

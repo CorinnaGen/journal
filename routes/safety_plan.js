@@ -7,7 +7,7 @@ const userMustLoggedIn = require("../guards/userMustLoggedIn");
 router.get("/", userMustLoggedIn, async (req, res) => {
 	
 	try {
-		const results = await db("SELECT * FROM safety_plan;");
+		const results = await db(`SELECT * FROM safety_plan WHERE user_id ="${req.user_id}";`);
 		res.send(results.data);
 	} catch (err) {
 		res.status(500).send(err);
@@ -26,8 +26,8 @@ router.get("/:id", userMustLoggedIn, spMustExist, async (req, res) => {
 router.post("/", userMustLoggedIn, async function (req, res, next) {
 	try {
 		const { date } = req.body;
-		await db(`INSERT INTO safety_plan (date) VALUE ("${date}");`);
-		const results = await db("SELECT * FROM safety_plan;");
+		await db(`INSERT INTO safety_plan (date, user_id) VALUE ("${date}", ${req.user_id} );`);
+		const results = await db("SELECT * FROM safety_plan ;");
 		res.send(results.data);
 	} catch (err) {
 		res.status(500).send(err);

@@ -13,6 +13,7 @@ function Welcome() {
   };
 
     return (
+        <div><NavBar />
         <div className="container bg-light shadow mt-4">
         
             <h3 className="darker">Welcome!</h3>
@@ -58,6 +59,7 @@ function Welcome() {
                 
 
                 </div>
+        </div>
         </div>
     )
 }
