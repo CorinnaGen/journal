@@ -6,7 +6,10 @@ import joypic from "../Photos/mymomentsofjoy.png";
 
 import "../App.css";
 
-export default function Home() {
+export default function Dashboard() {
+
+//fetch the user to display welcome to the one logged in
+
 	return (
 		<div className="container shadow bg-light mt-4 mb-4">
 			<h3 className="darker">Welcome!</h3> <hr />

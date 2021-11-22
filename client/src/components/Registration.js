@@ -1,6 +1,7 @@
 import React, { useState} from 'react'
 
 
+
 function Registration() {
 const [user, setUser] = useState({ username: "", email: "", password: ""});
 
@@ -41,6 +42,7 @@ const {username, email, password } = user;
         <div>
             <div className="container bg-light shadow mt-4">
             <h3 className='darker'>Registration</h3>
+            
              
             <form id="registrationform" onSubmit={handleSubmit}>
             

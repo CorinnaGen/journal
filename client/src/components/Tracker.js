@@ -36,7 +36,7 @@ const sumMood = entries.map(entry => {
         case 'Hopeful' :
         return 'hopeful'
         case 'Optimistic' :
-        return 'optmistic'
+        return 'optimistic'
         case 'Tired' :
         return 'tired'
         case 'Anxious' :
@@ -62,7 +62,7 @@ let prevalentMood = sumMood.reduce((counter, current) => (counter[current] = cou
 //it returns an object like this {tired: 1, angry: 1, sad: 1, depressed: 1, happy: 1}
 let moodTrack = [];
 for(let key in prevalentMood){
-if(prevalentMood[key] > 1){
+if(prevalentMood[key] > 3){
  moodTrack.push(key)
 }}
 
@@ -83,7 +83,7 @@ console.log(moodTrack)
                             <div className="col-3" key={i}>
                             {(mood === 'happy') ? (<div className="mood happy"></div>)
                             : (mood ==='hopeful') ?
-                            (<div className=" mood hopeful"></div>)
+                            (<div className="mood hopeful"></div>)
                             : (mood === 'optimistic') ? (<div className="mood optimistic"></div>)
                             : (mood === 'tired') ? (<div className="mood tired"></div>)
                             : (mood === 'anxious') ? (<div className=" mood anxious"></div>)

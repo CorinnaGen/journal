@@ -79,7 +79,7 @@ function NewEntry() {
 						</option>
 						<option value="Happy">Happy</option>
 						<option value="Hopeful">Hopeful</option>
-						<option value="Optmistic">Optmistic</option>
+						<option value="Optimistic">Optimistic</option>
 						<option value="Tired">
 							Tired
 						</option>

@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
-import axios from 'axios'
+import { useNavigate } from "react-router-dom";
+import useAuth from '../hooks/useAuth';
+
 
 function Login() {
 
@@ -8,57 +10,62 @@ function Login() {
     password: "test",
   });
 
+  const [error, setError] = useState(null);
+
+  const auth = useAuth() //so i dont need to do the post in here
+  const navigate = useNavigate();
+
+
   const { username, password } = credentials;
 
   const handleChange = (e) => {
-    e.preventDefault();
+    e.persist();
     const { name, value } = e.target;
     setCredentials({ ...credentials, [name]: value });
   };
 
-  const login = async () => {
+const login = async () =>{
+  try{
+    await auth.signin(credentials)
+    navigate("/dashboard")
+  } catch(err){
+    setError(err)
+  }
+};
 
-      console.log("am i in the login?")
-    try {
-      const { data } = await axios("/users/login", {
-        method: "POST",
-        data: credentials,
+//THIS WAS BEFORE THE AUTHPROVIDER THING
+//   const login = async () => {
+
+//       console.log("am i in the login?")
+//     try {
+//       const { data } = await axios("/users/login", {
+//         method: "POST",
+//         data: credentials,
         
-      });
+//       });
+//  //store it locally
+//       localStorage.setItem("token", data.token);
+//       console.log(data.message, data.token);
+//     } catch (error) {
+//       console.log(error);
+//     }
+ 
+    
+//   };
 
-      //store it locally
-      localStorage.setItem("token", data.token);
-      console.log(data.message, data.token);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+//   const logout = () => {
+//     localStorage.removeItem("token");
+//     console.log('am i in the logout?')
+//   };
 
-  const logout = () => {
-    localStorage.removeItem("token");
-    console.log('am i in the logout?')
-  };
-
-  // const requestData = async () => {
-  //   try {
-  //     const { data } = await axios("/journal_entries", {
-  //       headers: {
-  //         authorization: `Bearer ${localStorage.getItem("token")}`,
-  //       },
-  //     });
-
-  //     console.log('this is the data', data.message);
-  //   } catch (error) {
-  //     console.log('is this the error?', error);
-  //   }
-  // };
+  
 
 
 
     return (
        
         <div className="container bg-light shadow mt-4">
-                <h2 className='darker'>Welcome back!</h2>
+                
                 <br />
             <h3 className='darker'>Login</h3>
             
@@ -70,11 +77,13 @@ function Login() {
             <button className="btn btn-test6 bg-test6 m-4" type="submit" onClick={login}>Log in</button>
            
             <div className="col-6 mt-4">
-            <a href="#"> I forgot my password!</a>
-            </div>
-            </div>
             
-             <button className="btn btn-test6 bg-test6 m-4" onClick={logout}>Log out</button>
+            </div>
+            </div>
+             {error && <div className="alert alert-danger mt-4">{error}</div>}
+             <br />
+            
+             {/* <button className="btn btn-test6 bg-test6 m-4" onClick={logout}>Log out</button> */}
               {/* <button className="btn btn-test6 bg-test6 m-4" onClick={requestData}>see entries</button> */}
         </div>
     )
