@@ -57,36 +57,46 @@ const sumMood = entries.map(entry => {
  
 });
 
-console.log('this is the sum mood array', sumMood)
+// console.log('this is the sum mood array', sumMood)
 
 
 //I count the times the user felt the same mood
 let prevalentMood = sumMood.reduce((counter, current) => (counter[current] = counter[current] + 1 || 1, counter), {}); 
 //it returns an object like this {tired: 1, angry: 1, sad: 1, depressed: 1, happy: 1}
 
-//Store the prevalent mood to show to the user / prevalent you felt more than 3 times that way
+//Store the prevalent mood to show to the user / prevalent you felt more than 3 times that way overall
+//this is render in the 'you felt mostly'
 let moodTrack = [];
 for(let key in prevalentMood){
 if(prevalentMood[key] > 3){
  moodTrack.push(key)
 }}
 
-console.log('this is prevalent mood', prevalentMood)
-console.log('this is the moodtrack array', moodTrack)
+// console.log('this is prevalent mood', prevalentMood)
+// console.log('this is the moodtrack array', moodTrack)
 
+//to pop up notification when a particular set of emotions shows more than 3 days in a row
 
-//if you felt a negative emotion more than 3 days in a row
-
-
+//if you felt a sad emotion more than 3 days in a row
 let sadCount = 0;
 for(let i=0; i < sumMood.length; i++){
- if(sumMood[i]  === 'sad' || sumMood[i] === 'depressed' || sumMood[i] === 'angry' || sumMood[i] === 'disconnected'
-   && sumMood[i+1] === 'sad' || sumMood[i+1] === 'depressed' || sumMood[i+1] === 'angry' || sumMood[i+1] === 'disconnected'
-  && sumMood[i+2] === 'sad' || sumMood[i+2] === 'depressed' || sumMood[i+2] === 'angry' || sumMood[i+2] === 'disconnected')
+ if(sumMood[i]  === 'sad' || sumMood[i] === 'depressed' || sumMood[i] === 'disconnected'
+   && sumMood[i+1] === 'sad' || sumMood[i+1] === 'depressed' || sumMood[i+1] === 'disconnected'
+  && sumMood[i+2] === 'sad' || sumMood[i+2] === 'depressed'  || sumMood[i+2] === 'disconnected')
  sadCount++
 }
 
-console.log('this is sad count',sadCount)
+// console.log('this is sad count',sadCount)
+
+//anxiety levels
+let anxietyCount = 0;
+for(let i=0; i < sumMood.length; i++){
+ if(sumMood[i]  === 'anxious' || sumMood[i] === 'tired' || sumMood[i] === 'angry' 
+   && sumMood[i+1] === 'anxious' || sumMood[i+1] === 'tired' || sumMood[i+1] === 'angry'
+  && sumMood[i+2] === 'anxious' || sumMood[i+2] === 'tired' || sumMood[i+2] === 'angry' )
+ anxietyCount++
+}
+// console.log('anx count', anxietyCount)
 
 //if you felt a positive emotion more than 3 days in a row
 let happyCount = 0;
@@ -96,11 +106,11 @@ for(let i=0; i < sumMood.length; i++){
   && sumMood[i+2] === 'happy' || sumMood[i+2] === 'hopeful' || sumMood[i+2] === 'optimistic' )
  happyCount++
 }
-console.log('this is happycount', happyCount)
+// console.log('this is happycount', happyCount)
 
 
 const moodbalance = () =>{
-if(happyCount > sadCount){
+if(happyCount > sadCount && anxietyCount < 2 ){
     return new Noty({
     type: 'warning',
     theme: 'relax',
@@ -108,7 +118,7 @@ if(happyCount > sadCount){
     text: 'Overall things are good, cheerish these moments!',
     timeout: 3000,
 }).show();
-} else if(happyCount < sadCount){
+} else if(happyCount < sadCount || anxietyCount > 2){
     return new Noty({
     type: 'warning',
     theme: 'relax',
@@ -116,12 +126,12 @@ if(happyCount > sadCount){
     text: 'You had some difficult days, check your safety plan',
     timeout: 3000,
 }).show();
-}else{
+}else if(sadCount < anxietyCount){
     return new Noty({
     type: 'info',
     theme: 'relax',
     layout: 'topRight',
-    text: 'Keep tracking your mood!',
+    text: 'Seems you could use some relaxation exercises',
     timeout: 3000,
 }).show();
 
