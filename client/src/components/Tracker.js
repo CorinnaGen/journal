@@ -12,12 +12,10 @@ function Tracker() {
     const [entries, setEntries] = useState([]) //this is an array of obj
     const [error, setError] = useState([])
  
-    
+//get the entries
 useEffect(async () => {
 		try {
-			// const response = await fetch("/journal_entries");
-			// const data = await response.json();
-			// 
+
         const { data } = await axios("/journal_entries", {
         headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -31,7 +29,9 @@ useEffect(async () => {
 	}, []);
 
 
-//to generate a mood value
+
+
+//store in array all the mood entries, the name are associated with css class to display the squares in different colors
 const sumMood = entries.map(entry => {
     switch(entry.mood){
         case 'Happy' :
@@ -57,27 +57,23 @@ const sumMood = entries.map(entry => {
  
 });
 
-// console.log('this is the sum mood array', sumMood)
 
-
-//I count the times the user felt the same mood
+//I count the times the user felt the same mood, storing each mood as a key and assign a value, representing how many times said mood appears
 let prevalentMood = sumMood.reduce((counter, current) => (counter[current] = counter[current] + 1 || 1, counter), {}); 
-//it returns an object like this {tired: 1, angry: 1, sad: 1, depressed: 1, happy: 1}
+//{tired: 1, angry: 1, sad: 1, depressed: 1, happy: 1}
 
-//Store the prevalent mood to show to the user / prevalent you felt more than 3 times that way overall
-//this is render in the 'you felt mostly'
+//Once I have this object, I loop into it to store only the mood with a values of more than 5 // this display in 'You felt xxx for more than 5 days'
 let moodTrack = [];
 for(let key in prevalentMood){
-if(prevalentMood[key] > 3){
+if(prevalentMood[key] > 5){
  moodTrack.push(key)
 }}
 
-// console.log('this is prevalent mood', prevalentMood)
-// console.log('this is the moodtrack array', moodTrack)
 
-//to pop up notification when a particular set of emotions shows more than 3 days in a row
 
-//if you felt a sad emotion more than 3 days in a row
+//To pop up notification when a particular set of emotions shows more than 3 days in a row 
+
+//Sadness
 let sadCount = 0;
 for(let i=0; i < sumMood.length; i++){
  if(sumMood[i]  === 'sad' || sumMood[i] === 'depressed' || sumMood[i] === 'disconnected'
@@ -86,9 +82,9 @@ for(let i=0; i < sumMood.length; i++){
  sadCount++
 }
 
-// console.log('this is sad count',sadCount)
 
-//anxiety levels
+
+//Anxiety
 let anxietyCount = 0;
 for(let i=0; i < sumMood.length; i++){
  if(sumMood[i]  === 'anxious' || sumMood[i] === 'tired' || sumMood[i] === 'angry' 
@@ -96,9 +92,9 @@ for(let i=0; i < sumMood.length; i++){
   && sumMood[i+2] === 'anxious' || sumMood[i+2] === 'tired' || sumMood[i+2] === 'angry' )
  anxietyCount++
 }
-// console.log('anx count', anxietyCount)
 
-//if you felt a positive emotion more than 3 days in a row
+
+//Happiness
 let happyCount = 0;
 for(let i=0; i < sumMood.length; i++){
  if(sumMood[i]  === 'happy' || sumMood[i] === 'hopeful' || sumMood[i] === 'optimistic' 
@@ -137,7 +133,9 @@ if(happyCount > sadCount && anxietyCount < 2 ){
 
 }
 }
-moodbalance();
+
+//it still triggers 2 times, but the first the counters are empty so no noty shows
+useEffect(() =>{moodbalance()}, [entries]) 
   
 
     return (
@@ -145,12 +143,14 @@ moodbalance();
         <div className="container bg-light shadow mt-4">
             <h3 className="darker"> Tracker</h3>
             <p>Your mood in the past days based on your entries</p>
-            <p>You felt mostly:</p>
+            <p>You felt for more than 5 days:</p>
+            <ul>
             {moodTrack.map((el, i) => (
                 <div key={i}>
-                <p>{el}</p>
+                <li>{el}</li>
                 </div>
             ))}
+            </ul>
             <div className="row m-4">
             {sumMood.map((mood, i) => (
                             <div className="col-3" key={i}>
