@@ -1,7 +1,10 @@
 import React, { useState} from 'react'
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-
+import Noty from 'noty'
+import "../../node_modules/noty/lib/themes/bootstrap-v4.css";
+import "../../node_modules/noty/lib/themes/relax.css"; 
+import "../../node_modules/noty/lib/noty.css";  
 
 
 function Registration() {
@@ -44,6 +47,13 @@ register();
     } catch (error) {
       setError(error.message);
     }
+   new Noty({
+    type: 'success',
+    theme: 'relax',
+    layout: 'topRight',
+    text: 'Account created',
+    timeout: 3000,
+}).show();
    navigate("/login")
 }
 const {username, email, password } = user;
