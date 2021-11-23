@@ -61,13 +61,29 @@ console.log(sumMood)
 
 let prevalentMood = sumMood.reduce((counter, current) => (counter[current] = counter[current] + 1 || 1, counter), {}); 
 //it returns an object like this {tired: 1, angry: 1, sad: 1, depressed: 1, happy: 1}
+
+//I store the prevalent mood to show to the user
 let moodTrack = [];
 for(let key in prevalentMood){
 if(prevalentMood[key] > 3){
  moodTrack.push(key)
 }}
 
+console.log(prevalentMood)
 console.log(moodTrack)
+
+//this is to count only negative emotions
+
+let sadCount = 0;
+for(let i=0; i < moodTrack.length; i++){
+ if(moodTrack[i]  === 'sad' || moodTrack[i] === 'depressed' || moodTrack[i] === 'disconnected' || moodTrack[i] === 'angry' )
+ sadCount++
+}
+if(sadCount > 1){
+    console.log('Your mood is worsening, check your safety plan')
+}
+
+
   
 
     return (
@@ -75,9 +91,10 @@ console.log(moodTrack)
         <div className="container bg-light shadow mt-4">
             <h3 className="darker"> Tracker</h3>
             <p>Your mood in the past days based on your entries</p>
+            <p>You felt mostly:</p>
             {moodTrack.map((el, i) => (
                 <div key={i}>
-                <p>You felt mostly: {el}</p>
+                <p>{el}</p>
                 </div>
             ))}
             <div className="row m-4">
