@@ -15,7 +15,7 @@ router.get("/resources", userMustLoggedIn, async function (req, res, next) {
 
 router.get("/identifiers", userMustLoggedIn, async function (req, res, next) {
 	try {
-		const results = await db("SELECT * FROM sp_identifiers;");
+		const results = await db(`SELECT * FROM sp_identifiers WHERE user_id ="${req.user_id}";`);
 		res.send(results.data);
 	} catch (err) {
 		res.status(500).send(err);
@@ -58,7 +58,7 @@ router.post("/:sp_id/resources", userMustLoggedIn, async function (req, res, nex
 		const { sp_id } = req.params;
 		const { name, info, type } = req.body;
 		await db(
-			`INSERT INTO sp_resources (name, info, type, sp_id) VALUES ("${name}","${info}","${type}",${sp_id});`
+			`INSERT INTO sp_resources (name, info, type, sp_id, user_id) VALUES ("${name}","${info}","${type}",${sp_id}, ${req.user_id});`
 		);
 		const results = await db(
 			`SELECT * FROM sp_resources WHERE sp_id=${sp_id};`
