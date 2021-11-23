@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import journalpic from "../Photos/myjournal.png";
 import sfplanpic from "../Photos/mysafetyplan.png";
 import joypic from "../Photos/mymomentsofjoy.png";
+import moodpic from "../Photos/moodtracker.png";
 import NavBar from "./NavBar";
 
 import "../App.css";
@@ -29,6 +30,11 @@ export default function Dashboard() {
 				<br />
 				<Link to={`/safetyplan`}>
 					<img className="img-fluid shadow" width="40%" src={sfplanpic} />
+				</Link>
+				<br />
+				<br />
+				<Link to={`/tracker`}>
+					<img className="img-fluid shadow" width="40%" src={moodpic} />
 				</Link>
 			</div>
 			<br />
