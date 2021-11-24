@@ -1,8 +1,8 @@
 import React from 'react'
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import NavBar from './NavBar';
-// import mainlogo from "./Photos/logo.png";
+import mainlogo from "../Photos/logo.png";
 
 function Welcome() {
 
@@ -17,12 +17,25 @@ function Welcome() {
         <div className="container bg-light shadow mt-4">
         
             <h3 className="darker">Welcome!</h3>
-            <div className="col-6">
-                <h4>About MyJournal</h4>
+            <div className="ro4 m-4">
+                <h4>About Emme's Journal</h4>
                 <br/>
-                <p>MyJournal provides a safe space for you to write down your toughts, to reflect and remember your moments of Joy.</p>
-                <p>Besides, you can fill your own safety plan: what are your triggers? What are things that lift you up?</p>
-                <p>And least but not last, now MyJournal offers a mood tracker functionality!</p>
+                <div className='col-8'>
+                
+                <div className='cardbody m-4'>
+                <p>MyJournal provides a <strong>safe space</strong> for you to write down your toughts, to reflect and remember your moments of <strong>Joy</strong>.</p>
+                <p>Besides, you can fill your own <strong>safety plan</strong>: what are your triggers? What are the things that lift you up?</p>
+                <p>And least but not last, now MyJournal offers a <strong>mood tracker</strong> functionality!</p>
+                </div>
+                </div>
+                <div className='col-8'>
+                
+                <div className='cardbody m-4'>
+                    <img src={mainlogo} className='img-fluid' alt='logo' />
+                </div>
+                
+                </div>
+            
             </div>
             <div className="row">
                 <div className="col-6">

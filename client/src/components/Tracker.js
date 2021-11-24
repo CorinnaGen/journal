@@ -122,7 +122,7 @@ if(happyCount > sadCount && anxietyCount < 2 ){
     text: 'You had some difficult days, check your safety plan',
     timeout: 3000,
 }).show();
-}else if(sadCount < anxietyCount){
+}else if(sadCount < anxietyCount  && anxietyCount > 2 ){
     return new Noty({
     type: 'info',
     theme: 'relax',
@@ -134,7 +134,7 @@ if(happyCount > sadCount && anxietyCount < 2 ){
 }
 }
 
-//it still triggers 2 times, but the first the counters are empty so no noty shows
+
 useEffect(() =>{moodbalance()}, [entries]) 
   
 
