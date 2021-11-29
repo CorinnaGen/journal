@@ -45,6 +45,8 @@ Run `USE journal` `SHOW TABLES` `DESCRIBE TABLE_NAME` to take a look at each tab
 
 ![Schema](databaseschema.png)
 
+`https://drive.google.com/file/d/1B4yORPezRqou2AG1R4QKQWPum3KLjKHK/view?usp=sharing`
+
 ## Link to API Endroutes
 
 `https://docs.google.com/document/d/1JU-gtpgApKgXMSa7QEwGMQKLkZ1rUR8leq_RoEgCd9U/edit?usp=sharing`
