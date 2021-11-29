@@ -43,7 +43,7 @@ Run `USE journal` `SHOW TABLES` `DESCRIBE TABLE_NAME` to take a look at each tab
 
 ## MySQL database table layout
 
-![Schema](https://app.dbdesigner.net/designer/schema/472935)
+![Schema](databaseschema.png)
 
 ## Link to API Endroutes
 
