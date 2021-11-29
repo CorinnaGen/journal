@@ -1,4 +1,17 @@
-# Journal by Emme Fayez
+# Journal - feature extension
+
+This is a feature extension of the project "Journal" made by Emme Fayez. 
+
+Now journal is private! You have auth/auth.
+
+Plus a new feature: a mood tracker!
+
+It shows the mood changes based on the entries in colors that go from bright green(Happy) to black(Depressed).
+
+It informs the user of the mood they felt for more than 5 days in total.
+
+Display a different notification if the user felt for more than 3 days in a row a certain emotion!
+
 
 # Installation
 
@@ -30,7 +43,7 @@ Run `USE journal` `SHOW TABLES` `DESCRIBE TABLE_NAME` to take a look at each tab
 
 ## MySQL database table layout
 
-![Schema](/readme/schema.png)
+![Schema](https://app.dbdesigner.net/designer/schema/472935)
 
 ## Link to API Endroutes
 
