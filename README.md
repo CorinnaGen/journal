@@ -65,7 +65,7 @@ Run `USE journal` `SHOW TABLES` `DESCRIBE TABLE_NAME` to take a look at each tab
 
 ![Resources](/readme/resources_api.png)
 
-# Future Expansion Ideas
+# Credits
 
 _This is a student project that was created at [CodeOp](http://codeop.tech), a
 full stack development bootcamp in Barcelona._
